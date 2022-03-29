@@ -1,4 +1,4 @@
 library(testthat)
-library(evejcik)
+library(plsr)
 
-test_check("evejcik")
+test_check("plsr")
