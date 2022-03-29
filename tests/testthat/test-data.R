@@ -1,3 +1,4 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+test_that("Checking greenland rows, cols", {
+  expect_equal(dim(greenland)[1], 28),
+  expect_equal(dim(greenland)[2], 3700)
 })
