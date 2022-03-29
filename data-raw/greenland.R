@@ -1,4 +1,6 @@
 ## code to prepare `greenland` dataset goes here
 library(tidyverse)
-greenland <- read_csv("wetChemAbsorbance.csv")
+library(dplyr)
+greenland <- read_csv("wetChemAbsorbance.csv")%>%
+  select(-`...3`)
 usethis::use_data(greenland, overwrite = TRUE)
