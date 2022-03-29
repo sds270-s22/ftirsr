@@ -1,24 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# plsr.package
+# plsr
 
-The goal of plsr.package is to faciliate Partial Least Squares
-Regression on biogenic silica and organic carbon percentages in lake
-sediment core samples.
+The goal of plsr is to faciliate Partial Least Squares Regression on
+biogenic silica and organic carbon percentages in lake sediment core
+samples.
 
 ## Installation
-
-You can install the development version of plsr like so:
-
-``` r
-install.packages("plsr")
-```
 
 The development version from GitHub can be accessed like so:
 
 ``` r
-remotes::install_github("evejcik/plsr")
+remotes::install_github("sds270-s22/plsr")
 ```
 
 ## Example
@@ -26,7 +20,7 @@ remotes::install_github("evejcik/plsr")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(evejcik)
+library(plsr)
 ## basic example code
 ```
 
