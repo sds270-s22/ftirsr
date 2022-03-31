@@ -3,9 +3,9 @@
 
 # plsr
 
-The goal of `plsr` is to facilitate Partial Least Squares Regression on
-biogenic silica and organic carbon percentages in lake sediment core
-samples.
+The goal of `plsr` is to help easily create a Partial Least Squares
+Regression model to estimate composition of natural compounds such as
+biogenic silica and total organic carbon in lake sediment core samples.
 
 ## Installation
 
@@ -13,8 +13,15 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/plsr")
-#> Skipping install of 'plsr' from a github remote, the SHA1 (b07a8b5b) has not changed since last install.
-#>   Use `force = TRUE` to force installation
+#> Downloading GitHub repo sds270-s22/plsr@HEAD
+#>      checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmprMIHVj/remotes14c1d545c8bb7/sds270-s22-plsr-0b26678/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmprMIHVj/remotes14c1d545c8bb7/sds270-s22-plsr-0b26678/DESCRIPTION’
+#>   ─  preparing ‘plsr’:
+#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘plsr_0.0.0.9001.tar.gz’
+#>      
+#> 
 ```
 
 ## Example
