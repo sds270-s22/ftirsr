@@ -3,9 +3,9 @@
 
 # plsr
 
-The goal of plsr is to faciliate Partial Least Squares Regression on
-biogenic silica and organic carbon percentages in lake sediment core
-samples.
+The goal of `plsr` is to help easily create a Partial Least Squares
+Regression model to estimate composition of natural compounds such as
+biogenic silica and total organic carbon in lake sediment core samples.
 
 ## Installation
 
@@ -13,6 +13,15 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/plsr")
+#> Downloading GitHub repo sds270-s22/plsr@HEAD
+#>      checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmprMIHVj/remotes14c1d545c8bb7/sds270-s22-plsr-0b26678/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmprMIHVj/remotes14c1d545c8bb7/sds270-s22-plsr-0b26678/DESCRIPTION’
+#>   ─  preparing ‘plsr’:
+#>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘plsr_0.0.0.9001.tar.gz’
+#>      
+#> 
 ```
 
 ## Example
@@ -21,32 +30,8 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(plsr)
-## basic example code
+
+# This shows finding the maximum biogenic silica percentage in the dataset
+max(greenland$bsi_percent)
+#> [1] 30.61
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.

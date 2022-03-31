@@ -15,13 +15,13 @@ knitr::opts_chunk$set(
 
 # plsr
 
-The goal of plsr is to faciliate Partial Least Squares Regression on biogenic silica and organic carbon percentages in lake sediment core samples. 
+The goal of `plsr` is to help easily create a Partial Least Squares Regression model to estimate composition of natural compounds such as biogenic silica and total organic carbon in lake sediment core samples. 
 
 ## Installation
 
 The development version from GitHub can be accessed like so:
 
-``` r
+``` {r}
 remotes::install_github("sds270-s22/plsr")
 ```
 
@@ -32,8 +32,8 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(plsr)
 
-# This shows finding the maximum BSi percentage in the dataset
-max(greenland$BSiPercent)
+# This shows finding the maximum biogenic silica percentage in the dataset
+max(greenland$bsi_percent)
 ```
 
 
