@@ -1,5 +1,4 @@
 ## code to prepare `greenland` dataset goes here
-library(tidyverse)
 library(dplyr)
 library(janitor)
 greenland <- read_csv("data-raw/wetChemAbsorbance.csv")%>%
