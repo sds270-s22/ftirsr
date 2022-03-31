@@ -1,12 +1,12 @@
 Package: plsr
-Title: Facilitate PLSR on Infared Spectroscopy
+Title: Easily run a Partial Least Squares Regression with FTIR spectroscopy data
 Version: 0.0.0.9001
 Authors@R: c(
     person("Emma", "Vejcik", email = "evejcik@gmail.com", role = c("aut", "cre")),
     person("Grace", "Hartley", email = "grace.hartley@gmail.com", role = "aut")
     )
 Maintainer: Emma Vejcik <evejcik@gmail.com>
-Description: The 'plsr' package works to faciliate Partial Least Squares Regression with infared spectroscopy data. This pacakge is designed to make it easy for geologists to create a model to analyze biogenic silica samples.
+Description: The `plsr` package works to faciliate Partial Least Squares (PLS) Regression with Fourier Transform Infrared (FTIR) spectroscopy data. This pacakge is designed to make it easy for geologists to create and optimize a PLS model to analyze the absorbance spectra of their data.
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 3.0.0)
