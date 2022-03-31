@@ -14,7 +14,7 @@ The development version from GitHub can be accessed like so:
 ``` r
 remotes::install_github("sds270-s22/plsr")
 #> Downloading GitHub repo sds270-s22/plsr@HEAD
-#>      checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmprMIHVj/remotes14c1d545c8bb7/sds270-s22-plsr-0b26678/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmprMIHVj/remotes14c1d545c8bb7/sds270-s22-plsr-0b26678/DESCRIPTION’
+#>      checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpfneiBf/remotes15d6c1d88b62/sds270-s22-plsr-7db18bc/DESCRIPTION’ ...  ✓  checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpfneiBf/remotes15d6c1d88b62/sds270-s22-plsr-7db18bc/DESCRIPTION’
 #>   ─  preparing ‘plsr’:
 #>      checking DESCRIPTION meta-information ...  ✓  checking DESCRIPTION meta-information
 #>   ─  checking for LF line-endings in source and make files and shell scripts
