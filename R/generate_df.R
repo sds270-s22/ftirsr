@@ -1,17 +1,24 @@
+#' A function that generates a dataframe in the proper format for the plsr model
+#'
+#' @param your_csv_folder The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
+#' @param your_wavenumbers The filepath to the sample with wavenumbers you want to use
+#' @importFrom magrittr %>%
 
+library(tidyverse)
 
-generate_alaska <- function(){
+generate_alaska <- function(your_csv_folder, your_wavenumbers){
   # First need to load list of sample names
-  fname <- list.files("Samples/alaska_csv", full.names = T)
+  # Create a list of all the file names in the folder
+  fname <- list.files(your_csv_folder, full.names = T)
 
   # Read all samples into a list
-  filelist <- map(fname, read_csv)
+  filelist <- purrr::map(fname, read_csv)
 
   # Add names to samples
   names(filelist) <- gsub(".*/(.*)\\..*", "\\1", fname)
 
   # select the columns we want
-  filelist <- map(filelist, function(x) {
+  filelist <- purrr::map(filelist, function(x) {
     x %>%
       select(wavenumber, absorbance)
   })
@@ -30,10 +37,7 @@ generate_alaska <- function(){
   # After this Vivienne didn't "trust" it to store the names so she added them as a column..
   # Something we should worry about? It's because detaching to create absorbance matrix...
 
-  # This is Vivienne's function dropNames
-  # Don't know if we need the following line
-  #wavenumber_df$dataset <- names(filelist) ## make this a specific column, don't trust it to store
-  # Rename column header from "wavenumbers" to "Vi" (FUNCTION #3)
+
   dropNames <- function(data) {
     names(data) <- paste("V", 1:ncol(data), sep = "")
     return(data)
@@ -44,28 +48,33 @@ generate_alaska <- function(){
   absorbance_df <- as.data.frame(do.call("rbind", absorbance_matrix))
 
   # Read in
-  AK_wav <- read_csv("Samples/alaska_csv/AS-01\ (8_24_16).0.csv")
-  ak_wavenumbers <- AK_wav$wavenumber
+  # do we want the ak_wav to be the generic?
+  # or could a call to interpolate be a good idea?
+  wavenumbers <- read_csv(your_wavenumbers) %>%
+    select(wavenumber)
 
-  colnames(absorbance_df) <- ak_wavenumbers
 
-  alaska_wet_chem <- read_csv("Maxwell-Alaska Samples  - Final Top 100.csv") %>%
-    janitor::clean_names() %>%
-    select(-notes, -toc_percent)
+  colnames(absorbance_df) <- wavenumbers
 
-  names(alaska_wet_chem)[2] <- "BSi"
+# # Adding the wet chem sample
+#   your_wet_chem <- read_csv("Maxwell-Alaska Samples  - Final Top 100.csv") %>%
+#     janitor::clean_names() %>%
+#     select(-notes, -toc_percent)
+#
+#   names(alaska_wet_chem)[2] <- "BSi"
+#
+#   absorbance_df <- absorbance_df %>%
+#     rownames_to_column(var = "sample")
+#
+#   # Alaska dataframe ready for model
+#   your_df <- full_join(absorbance_df, your_wet_chem, by = "sample") %>%
+#     select(BSi, everything()) %>%
+#     column_to_rownames(var = "sample")%>%
+#     # Deleted last column because  0 values
+#     select(-1883)
+#
+#   alaska_df[81,1] <- 23
 
-  absorbance_df <- absorbance_df %>%
-    rownames_to_column(var = "sample")
-
-  # Alaska dataframe ready for model
-  alaska_df <- full_join(absorbance_df, alaska_wet_chem, by = "sample") %>%
-    select(BSi, everything()) %>%
-    column_to_rownames(var = "sample")%>%
-    # Deleted last column because  0 values
-    select(-1883)
-
-  alaska_df[81,1] <- 23
-
-  return(alaska_df)
+ # return(your_df)
+  return(absorbance_df)
 }
