@@ -6,7 +6,7 @@
 
 
 # should attach these wavenumbers to the package I think, instead of having pathway
-generate_df <- function(your_csv_folder, wavenumbers = "AS-01\ (8_24_16).0.csv",
+generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
                         wet_chem_csv){
   # First need to load list of sample names
   # Create a list of all the file names in the folder
