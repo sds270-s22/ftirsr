@@ -3,7 +3,7 @@
 #' @param your_csv_folder The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
 #' @param wavenumbers The filepath to the sample with wavenumbers you want to use
 #' @importFrom magrittr %>%
-#' @import dpylr
+#' @import dplyr
 
 
 # should attach these wavenumbers to the package I think, instead of having pathway
