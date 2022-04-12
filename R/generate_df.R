@@ -3,6 +3,7 @@
 #' @param your_csv_folder The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
 #' @param wavenumbers The filepath to the sample with wavenumbers you want to use
 #' @importFrom magrittr %>%
+#' @import dpylr
 
 
 # should attach these wavenumbers to the package I think, instead of having pathway
@@ -70,7 +71,7 @@ generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
   # dataframe ready for model
   your_df <- full_join(absorbance_df, your_wet_chem, by = "sample") %>%
     na.omit() %>%
-    select(bsi, toc, everything()) %>%
+    select(bsi_percent, toc_percent, everything()) %>%
     column_to_rownames(var = "sample")%>%
     # Deleted last column because  0 values
     select(-1883)
