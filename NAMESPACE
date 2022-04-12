@@ -2,6 +2,4 @@
 
 export(out_vec)
 import(dplyr)
-import(dpylr)
 importFrom(magrittr,"%>%")
-importFrom(readr,read_csv)

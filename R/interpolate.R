@@ -7,7 +7,7 @@
 #' @export
 #' @import dplyr
 #' @importFrom magrittr %>%
-#' @importFrom readr read_csv
+
 
 out_vec <- readr::read_csv("AS-01 (8_24_16).0.csv")$wavenumber
 
