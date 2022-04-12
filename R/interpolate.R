@@ -9,7 +9,7 @@
 #' @importFrom magrittr %>%
 #'
 
-out_vec <- read_csv("AS-01\ (8_24_16).0.csv")$wavenumber
+out_vec <- read_csv("AS-01 (8_24_16).0.csv")$wavenumber
 
 
 interpolate_ftirs <- function(wavenumber, absorbance, out_vec) {
