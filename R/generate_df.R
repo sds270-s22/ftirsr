@@ -38,7 +38,7 @@ generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
 
 
   dropNames <- function(data) {
-    names(data) <- paste("V", 1:ncol(data), sep = "")
+    names(data) <- paste("v", 1:ncol(data), sep = "")
     return(data)
   }
 
@@ -61,8 +61,8 @@ generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
     select(-notes)
 
 
-  names(wet_chem)[2] <- "bsi"
-  names(wet_chem)[3] <- "toc"
+  names(wet_chem)[2] <- "bsi_percent"
+  names(wet_chem)[3] <- "toc_percent"
 
   absorbance_df <- absorbance_df %>%
     rownames_to_column(var = "sample")
