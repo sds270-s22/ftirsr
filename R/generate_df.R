@@ -6,9 +6,10 @@
 #' @import dplyr
 
 
+
 # should attach these wavenumbers to the package I think, instead of having pathway
 generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
-                        wet_chem_csv){
+                        wet_chem_csv = NULL){
   # First need to load list of sample names
   # Create a list of all the file names in the folder
   fname <- list.files(your_csv_folder, full.names = T)
@@ -50,35 +51,46 @@ generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
   # Read in
   # do we want the ak_wav to be the generic?
   # or could a call to interpolate be a good idea?
-  wavenumbers <- read_csv(wavenumbers) %>%
-    select(wavenumber)
+  wavenumbers <- read_csv(wavenumbers)
+
+  wavenumbers <- wavenumbers$wavenumber
 
 
   colnames(absorbance_df) <- wavenumbers
 
 # Adding the wet chem sample
-  wet_chem <- read_csv(wet_chem_csv) %>%
-    janitor::clean_names() %>%
-    select(-notes)
+  if(!is.null(wet_chem_csv)){
+    wet_chem <- read_csv(wet_chem_csv) %>%
+      janitor::clean_names() %>%
+
+      if(ncol != 2){
+      select(-3)
+      }
 
 
-  names(wet_chem)[2] <- "bsi_percent"
-  names(wet_chem)[3] <- "toc_percent"
+    absorbance_df <- absorbance_df %>%
+      rownames_to_column(var = "sample")
 
-  absorbance_df <- absorbance_df %>%
-    rownames_to_column(var = "sample")
+  }
+
+
 
   # dataframe ready for model
-  your_df <- full_join(absorbance_df, your_wet_chem, by = "sample") %>%
-    na.omit() %>%
-    select(bsi_percent, toc_percent, everything()) %>%
-    column_to_rownames(var = "sample")%>%
-    # Deleted last column because  0 values
-    select(-1883)
+  ## need a test to make sure that the absorbance_df and wet chem are the same length?
+  ## also need to not require wet chem!
+  if(!is.null(wet_chem_csv)){
+    your_df <- full_join(absorbance_df, wet_chem, by = "sample") %>%
+      na.omit() %>%
+      select(bsi_percent, toc_percent, everything()) %>%
+      column_to_rownames(var = "sample")
+  }else{
+    your_df <- absorbance_df
+  }
 
-  # not sure if we need this line for generic?
-  your_df[81,1] <- 23
 
   return(your_df)
 
 }
+
+
+
