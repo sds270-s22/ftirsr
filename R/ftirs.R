@@ -16,6 +16,8 @@ read_ftirs <- function(filepath, ...){
   files <- list.files(filepath)
 
   x <- files %>%
+    # the problem is that read_ftirs_file is expecting a filepath, and files
+    # is the name of the files
     map_df(read_ftirs_file, files)
   class(x) <- c("ftirs", class(x))
   return(x)
