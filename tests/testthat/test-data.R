@@ -14,8 +14,8 @@ test_that("Checking classes", {
 
 #alaskaWetChemAbsorbance.csv unit tests
 test_that("Checking alaskaWetChemAbsorbance rows, cols", {
-  expect_equal(dim(greenland)[1], 103)
-  expect_equal(dim(greenland)[2], 1884)
+  expect_equal(dim(alaskaWetChemAbsorbance)[1], 103)
+  expect_equal(dim(alaskaWetChemAbsorbance)[2], 1884)
 })
 
 test_that("Checking classes", {
