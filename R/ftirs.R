@@ -18,4 +18,5 @@ read_ftirs <- function(filepath, ...){
   x <- files %>%
     map_df(read_ftirs_file, files)
   class(x) <- c("ftirs", class(x))
+  return(x)
 }
