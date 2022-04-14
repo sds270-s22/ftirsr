@@ -16,6 +16,6 @@ read_ftirs <- function(filepath, ...){
   files <- list.files(filepath)
 
   x <- files %>%
-    map_df(read.ftirs_file, files)
+    map_df(read_ftirs_file, files)
   class(x) <- c("ftirs", class(x))
 }
