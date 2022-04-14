@@ -6,7 +6,6 @@
 #' @import dplyr
 
 
-
 # should attach these wavenumbers to the package I think, instead of having pathway
 generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
                         wet_chem_csv = NULL){
