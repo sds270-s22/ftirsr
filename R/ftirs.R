@@ -1,7 +1,7 @@
 #' A function that generates a dataframe in the proper format for the plsr model
 #' note to specify how to format data
-#' @param your_csv_folder The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
-#' @param wavenumbers The filepath to the sample with wavenumbers you want to use
+#' @param  The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
+#' @param  The filepath to the sample with wavenumbers you want to use
 #' @importFrom magrittr %>%
 #' @import dplyr
 
