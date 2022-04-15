@@ -10,9 +10,10 @@
 #' @importFrom magrittr %>%
 
 
-out_vec <-  readr::read_csv("AS-01 (8_24_16).0.csv")$wavenumber
+#out_vec <-  readr::read_csv("AS-01 (8_24_16).0.csv")$wavenumber
 
-interpolate_ftirs <- function(wavenumber, absorbance, out_vec) {
+interpolate_ftirs <- function(wavenumber, absorbance, out_vec =
+                                readr::read_csv("AS-01 (8_24_16).0.csv")$wavenumber) {
 
   # The meat of the function: returns both the interpolated absorbance vector and the wavenumber vec.
   tuple <- stats::approx(as.numeric(wavenumber), as.numeric(absorbance), xout = out_vec)

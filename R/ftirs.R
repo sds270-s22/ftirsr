@@ -18,20 +18,29 @@ read_ftirs_file <- function(single_filepath, ...){
     ## not sure what would be more standard
     select(-1)
 
-  # add outvec because only knows now because we loaded it
-  x <- interpolate_ftirs(x$wavenumber, x$absorbance, out_vec) %>%
+  # add out_vec somewhere because only knows now because we loaded it
+  x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
+
 }
 
 
 # input the folder ?????
-read_ftirs <- function(dir_path, ...){
+read_ftirs <- function(dir_path, wet_chem_path, ...){
   files <- list.files(dir_path, full.names = TRUE)
-
   x <- files %>%
     # the problem is that read_ftirs_file is expecting a filepath, and files
     # is the name of the files
     map_dfr(read_ftirs_file)
+
+  # need to universalize
+  wet_chem <- read_wet_chem(wet_chem_path)
+  x <- left_join(x, wet_chem, by = c("sample_id" = "Sample"))
+
     class(x) <- c("ftirs", class(x))
   return(x)
+}
+
+read_wet_chem <- function(filepath, ...){
+  wet_chem <- read_csv(filepath)
 }
