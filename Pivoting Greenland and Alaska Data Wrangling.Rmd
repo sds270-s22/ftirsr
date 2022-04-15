@@ -44,6 +44,7 @@ alaska_wavenumbers <- alaskaWetChemAbsorbance %>%
   select(-c(bsi_percent))
 ```
 
+
 # Joining All in One Table 
 
 ```{r}
@@ -53,6 +54,13 @@ alaska_all <- full_join(alaska_sites,alaska_wavenumbers, by = "sample_id")
 ```{r}
 greenland_all <- full_join(greenland_sites,greenland_wavenumbers, by = "sample_id")
 ```
+
+```{r}
+greenland_unpivot <- greenland_all %>%
+  pivot_wider(names_from = "Wavenumbers",
+              values_from = "Value") 
+```
+
 
 
 
