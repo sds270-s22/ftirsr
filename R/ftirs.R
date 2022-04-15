@@ -22,7 +22,7 @@ read_ftirs_file <- function(single_filepath, ...){
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 }
-#' @export
+
 
 # input the folder ?????
 read_ftirs <- function(dir_path, ...){
@@ -35,4 +35,3 @@ read_ftirs <- function(dir_path, ...){
     class(x) <- c("ftirs", class(x))
   return(x)
 }
-#' @export
