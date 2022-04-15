@@ -19,7 +19,7 @@ read_ftirs_file <- function(single_filepath, ...){
     select(-1)
 
   # add outvec because only knows now because we loaded it
-  x <- interpolate_ftirs(x$wavenumber, x$absorbance, out_vec) %>%
+  x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 }
 #' @export
