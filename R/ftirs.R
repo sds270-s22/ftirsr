@@ -16,17 +16,19 @@ read_ftirs_file <- function(single_filepath, ...){
     as_tibble() %>%
     ## this next line might not be relevant if we specify not to have index col
     ## not sure what would be more standard
-    select(-1)
+    select(-1) %>%
+
+    mutate(sample_id = fs::path_file(single_filepath))
 }
 
 # input the folder ?????
-read_ftirs <- function(filepath, ...){
-  files <- list.files(filepath)
+read_ftirs <- function(dir_path, ...){
+  files <- list.files(dir_path, full.names = TRUE)
 
   x <- files %>%
     # the problem is that read_ftirs_file is expecting a filepath, and files
     # is the name of the files
-    map_df(read_ftirs_file, files)
+    map_dfr(read_ftirs_file)
     class(x) <- c("ftirs", class(x))
   return(x)
 }
