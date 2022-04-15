@@ -16,9 +16,11 @@ read_ftirs_file <- function(single_filepath, ...){
     as_tibble() %>%
     ## this next line might not be relevant if we specify not to have index col
     ## not sure what would be more standard
-    select(-1) %>%
+    select(-1)
 
-    mutate(sample_id = fs::path_file(single_filepath))
+  # add outvec because only knows now because we loaded it
+  x <- interpolate_ftirs(x$wavenumber, x$absorbance, out_vec) %>%
+    mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 }
 
 # input the folder ?????
