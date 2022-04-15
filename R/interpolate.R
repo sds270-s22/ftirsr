@@ -6,6 +6,7 @@
 #'
 #' @export
 #' @import dplyr
+#' @import stats
 #' @importFrom magrittr %>%
 
 
