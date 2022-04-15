@@ -61,18 +61,7 @@ greenland_unpivot <- greenland_all %>%
               values_from = "Value") 
 ```
 
-```{r}
-interp_pivot <- big_interoplated %>%
-  pivot_wider(names_from = "wavenumber",
-              values_from = "absorbance") 
-```
 
-```{r}
-match_test_green <- greenland_unpivot %>%
-  select(-2)
-
-match_test_green == interp_pivot
-```
 
 
 
