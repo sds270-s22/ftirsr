@@ -8,29 +8,20 @@
 read_ftirs_file <- function(single_filepath, ...){
   x <- read_csv(single_filepath, ...)
 
-  # not sure if this next part doesn't go here
-  # we can ask Ben in Office hours
-  # If we are using this format, must make sure we are
-  # somehow interpolating the proper wavenumbers, or using placeholders
   x <- x %>%
     as_tibble() %>%
     ## this next line might not be relevant if we specify not to have index col
     ## not sure what would be more standard
     select(-1)
 
-  # add out_vec somewhere because only knows now because we loaded it
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 
 }
 
-
-# input the folder ?????
 read_ftirs <- function(dir_path, wet_chem_path, ...){
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
-    # the problem is that read_ftirs_file is expecting a filepath, and files
-    # is the name of the files
     map_dfr(read_ftirs_file)
 
   # need to universalize with "sample_id" and "Sample"
@@ -41,6 +32,8 @@ read_ftirs <- function(dir_path, wet_chem_path, ...){
   return(x)
 }
 
+# not sure if a function is necessary for this, could just do read_csv
+# there's nothing special about this at all
 read_wet_chem <- function(filepath, ...){
   wet_chem <- read_csv(filepath)
 }
