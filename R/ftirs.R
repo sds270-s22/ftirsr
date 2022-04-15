@@ -33,7 +33,7 @@ read_ftirs <- function(dir_path, wet_chem_path, ...){
     # is the name of the files
     map_dfr(read_ftirs_file)
 
-  # need to universalize
+  # need to universalize with "sample_id" and "Sample"
   wet_chem <- read_wet_chem(wet_chem_path)
   x <- left_join(x, wet_chem, by = c("sample_id" = "Sample"))
 
