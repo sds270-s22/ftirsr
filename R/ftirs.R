@@ -37,7 +37,7 @@ read_ftirs <- function(dir_path, wet_chem_path, ...){
   wet_chem <- read_wet_chem(wet_chem_path)
   x <- left_join(x, wet_chem, by = c("sample_id" = "Sample"))
 
-    class(x) <- c("ftirs", class(x))
+  class(x) <- c("ftirs", class(x))
   return(x)
 }
 
