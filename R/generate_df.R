@@ -2,8 +2,14 @@
 #' note to specify how to format data
 #' @param your_csv_folder The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
 #' @param wavenumbers The filepath to the sample with wavenumbers you want to use
+#' @param wet_chem_csv Parameters used to interpolate wavenumber values
 #' @importFrom magrittr %>%
+#' @importFrom purrr map
+#' @importFrom tidyr pivot_wider
+#' @importFrom janitor clean_names
+#' @importFrom tibble column_to_rownames rownames_to_column
 #' @import dplyr
+#' @export
 
 
 # should attach these wavenumbers to the package I think, instead of having pathway

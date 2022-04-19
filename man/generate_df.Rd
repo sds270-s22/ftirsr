@@ -15,6 +15,8 @@ generate_df(
 \item{your_csv_folder}{The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples}
 
 \item{wavenumbers}{The filepath to the sample with wavenumbers you want to use}
+
+\item{wet_chem_csv}{Parameters used to interpolate wavenumber values}
 }
 \description{
 A function that generates a dataframe in the proper format for the plsr model

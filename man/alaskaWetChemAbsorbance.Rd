@@ -10,7 +10,8 @@ A data frame with 193846 rows and 4 columns.
 \item{sample_id}{Core Sample ID referring to location and content of sample}
 \item{bsi_percent}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
 \item{wavenumbers}{Wavenumber value (units = reciprocal centimeters)}
-\item{absorbance}{Absorbance levels}}
+\item{absorbance}{Absorbance levels}
+}
 }
 \source{
 Gathered from \url{https://github.com/sds-capstone/PLSmodel}
