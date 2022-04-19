@@ -27,13 +27,14 @@ read_ftirs_file <- function(single_filepath, ...){
 #' @param  The filepath to the sample with wavenumbers you want to use
 #' @importFrom magrittr %>%
 #' @import dplyr
+#' @importFrom purrr map_dfr
 #' @import readr
 #' @export
 
 read_ftirs <- function(dir_path, wet_chem_path, ...){
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
-    map_dfr(read_ftirs_file)
+    purrr::map_dfr(read_ftirs_file)
 
   # need to universalize with "sample_id" and "Sample"
   # MAke wet chem optional!
