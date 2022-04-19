@@ -48,6 +48,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long",  ...) {
     wet_chem <- read_csv(wet_chem_path)
     # need to universalize with "sample_id" and "Sample"
     # also BSi vs. bsi
+    # don't really want to list `bsi` because could be adding toc!
     x <- left_join(x, wet_chem, by = c("sample_id" = "Sample")) %>%
       rename(bsi = Bsi) %>%
       select(sample_id, bsi, everything())
