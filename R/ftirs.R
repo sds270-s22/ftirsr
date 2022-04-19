@@ -5,6 +5,7 @@
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @import readr
+#' @export
 
 read_ftirs_file <- function(single_filepath, ...){
   x <- read_csv(single_filepath, ...)
