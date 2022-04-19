@@ -62,5 +62,22 @@ pivot_ftirs_wider <- function(ftirs_data_long, ...){
   ftirs_data_wide <- ftirs_data_long %>%
     pivot_wider(names_from = "wavenumber",
                 values_from = "absorbance")
+  class(ftirs_data_wide) <- c("ftirs", class(ftirs_data_wide))
+  return(ftirs_data_wide)
 
 }
+
+#' Function that pivots a wide ftirs dataframe back to a long format that is easier to store.
+#' @param ftirs_data_wide A wide ftirs dataframe that has a column for each wavenumber and a row for each sample.
+#' @export
+
+pivot_ftirs_longer <- function(ftirs_data_wide, ...){
+  ftirs_data_long <- ftirs_data_wide %>%
+    pivot_longer(3:1884,
+                 names_to = "wavenumbers",
+                values_to = "absorbance")
+
+  class(ftirs_data_long) <- c("ftirs", class(ftirs_data_long))
+  return(ftirs_data_long)
+}
+
