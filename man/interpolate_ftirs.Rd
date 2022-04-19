@@ -7,11 +7,7 @@
 interpolate_ftirs(
   wavenumber,
   absorbance,
-<<<<<<< HEAD
-  out_vec = read_csv("AS-01 (8_24_16).0.csv")$wavenumber
-=======
-  out_vec = readr::read_csv("data-raw/AS-01 (8_24_16).0.csv")$wavenumber
->>>>>>> 1f220682402e009784bc22bd485f7ea948d9c066
+  out_vec = read_csv("data-raw/AS-01 (8_24_16).0.csv")$wavenumber
 )
 }
 \arguments{

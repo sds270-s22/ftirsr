@@ -2,7 +2,7 @@
 % Please edit documentation in R/ftirs.R
 \name{read_ftirs_file}
 \alias{read_ftirs_file}
-\title{A function that generates a dataframe in the proper format for the plsr model
+\title{A function that generates a tibble in the proper format for the plsr model
 note to specify how to format data}
 \usage{
 read_ftirs_file(single_filepath, ...)
@@ -13,6 +13,6 @@ read_ftirs_file(single_filepath, ...)
 \item{wet_chem_path}{The filepath to the sample with wavenumbers you want to use}
 }
 \description{
-A function that generates a dataframe in the proper format for the plsr model
+A function that generates a tibble in the proper format for the plsr model
 note to specify how to format data
 }

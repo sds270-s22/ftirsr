@@ -46,7 +46,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, ...) {
     # need to universalize with "sample_id" and "Sample"
     # also BSi vs. bsi
     x <- left_join(x, wet_chem, by = c("sample_id" = "Sample")) %>%
-      rename(bsi = Bsi)%>%
+      rename(bsi = Bsi) %>%
       select(sample_id, bsi, everything())
   }
 
@@ -56,28 +56,40 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, ...) {
 
 #' Function that pivots the ftirs df to wider format that is necessary for the PLS model
 #' @param ftirs_data_long A long ftirs dataframe that contains columns for wavenumber and absorbance.
+#' @importFrom magrittr %>%
+#' @importFrom tidyr pivot_wider
 #' @export
 
-pivot_ftirs_wider <- function(ftirs_data_long, ...){
+pivot_ftirs_wider <- function(ftirs_data_long, ...) {
   ftirs_data_wide <- ftirs_data_long %>%
-    pivot_wider(names_from = "wavenumber",
-                values_from = "absorbance")
+    pivot_wider(
+      names_from = "wavenumber",
+      values_from = "absorbance"
+    )
   class(ftirs_data_wide) <- c("ftirs", class(ftirs_data_wide))
   return(ftirs_data_wide)
-
 }
 
 #' Function that pivots a wide ftirs dataframe back to a long format that is easier to store.
 #' @param ftirs_data_wide A wide ftirs dataframe that has a column for each wavenumber and a row for each sample.
+#' @param wet_chem A logical value that states if there is a column including wet chemistry data in the wide ftirs dataframe the user is inputting. `TRUE` means there is such column, `FALSE` denotes there is not.
+#' @importFrom magrittr %>%
+#' @importFrom tidyr pivot_longer
 #' @export
 
-pivot_ftirs_longer <- function(ftirs_data_wide, ...){
-  ftirs_data_long <- ftirs_data_wide %>%
-    pivot_longer(3:1884,
-                 names_to = "wavenumbers",
-                values_to = "absorbance")
-
+pivot_ftirs_longer <- function(ftirs_data_wide, wet_chem, ...) {
+    if(wet_chem == TRUE){
+      ftirs_data_long <- ftirs_data_wide %>%
+      pivot_longer(3:1884,
+      names_to = "wavenumbers",
+      values_to = "absorbance"
+    )
+    }else{
+      ftirs_data_long <- ftirs_data_wide %>%
+        pivot_longer(2:1883,
+        names_to = "wavenumbers",
+        values_to = "absorbance"
+        )}
   class(ftirs_data_long) <- c("ftirs", class(ftirs_data_long))
   return(ftirs_data_long)
 }
-

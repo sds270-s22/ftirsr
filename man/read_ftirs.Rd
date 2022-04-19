@@ -5,7 +5,7 @@
 \title{A function that generates a dataframe in the proper format for the plsr model
 note to specify how to format data}
 \usage{
-read_ftirs(dir_path, wet_chem_path, ...)
+read_ftirs(dir_path, wet_chem_path = NULL, ...)
 }
 \arguments{
 \item{The}{filepath to the sample with wavenumbers you want to use}
