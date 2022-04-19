@@ -1,4 +1,4 @@
-#' A function that generates a dataframe in the proper format for the plsr model
+#' A function that generates a tibble in the proper format for the plsr model
 #' note to specify how to format data
 #' @param dir_path The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
 #' @param wet_chem_path The filepath to the sample with wavenumbers you want to use
@@ -22,7 +22,7 @@ read_ftirs_file <- function(single_filepath, ...) {
 
   # use round()
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
-    mutate(sample_id = tools::file_path_sans_ext(path_file(single_filepath)))
+    mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 }
 
 #' A function that generates a dataframe in the proper format for the plsr model
@@ -38,14 +38,29 @@ read_ftirs_file <- function(single_filepath, ...) {
 read_ftirs <- function(dir_path, wet_chem_path = NULL, ...) {
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
-    purrr::map_dfr(read_ftirs_file)
+    purrr::map_dfr(read_ftirs_file) %>%
+    select(sample_id, everything())
 
   if (!is.null(wet_chem_path)) {
     wet_chem <- read_csv(wet_chem_path)
     # need to universalize with "sample_id" and "Sample"
-    x <- left_join(x, wet_chem, by = c("sample_id" = "Sample"))
+    # also BSi vs. bsi
+    x <- left_join(x, wet_chem, by = c("sample_id" = "Sample")) %>%
+      rename(bsi = Bsi)%>%
+      select(sample_id, bsi, everything())
   }
 
   class(x) <- c("ftirs", class(x))
   return(x)
+}
+
+#' Function that pivots the ftirs df to wider format that is necessary for the PLS model
+#' @param ftirs_data_long A long ftirs dataframe that contains columns for wavenumber and absorbance.
+#' @export
+
+pivot_ftirs_wider <- function(ftirs_data_long, ...){
+  ftirs_data_wide <- ftirs_data_long %>%
+    pivot_wider(names_from = "wavenumber",
+                values_from = "absorbance")
+
 }
