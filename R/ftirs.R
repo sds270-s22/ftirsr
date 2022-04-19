@@ -4,6 +4,7 @@
 #' @param  The filepath to the sample with wavenumbers you want to use
 #' @importFrom magrittr %>%
 #' @import dplyr
+#' @import readr
 
 read_ftirs_file <- function(single_filepath, ...){
   x <- read_csv(single_filepath, ...)
