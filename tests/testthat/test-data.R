@@ -2,8 +2,8 @@ library(testthat)
 
 #greenland.csv unit tests
 test_that("Checking greenland rows, cols", {
-  expect_equal(dim(greenland)[1], 28)
-  expect_equal(dim(greenland)[2], 3699)
+  expect_equal(dim(greenland)[1], 52696)
+  expect_equal(dim(greenland)[2], 1819)
 })
 
 test_that("Checking classes", {
@@ -14,8 +14,8 @@ test_that("Checking classes", {
 
 #alaskaWetChemAbsorbance.csv unit tests
 test_that("Checking alaskaWetChemAbsorbance rows, cols", {
-  expect_equal(dim(alaskaWetChemAbsorbance)[1], 103)
-  expect_equal(dim(alaskaWetChemAbsorbance)[2], 1884)
+  expect_equal(dim(alaskaWetChemAbsorbance)[1], 193640)
+  expect_equal(dim(alaskaWetChemAbsorbance)[2], 6)
 })
 
 test_that("Checking classes", {

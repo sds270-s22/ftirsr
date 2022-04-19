@@ -4,7 +4,6 @@ library(janitor)
 library(tidyr)
 library(readr)
 library(magrittr)
-
 greenland <- read_csv("data-raw/wetChemAbsorbance.csv")%>%
   select(-`...3`) %>%
   clean_names() %>%
@@ -14,4 +13,3 @@ greenland <- read_csv("data-raw/wetChemAbsorbance.csv")%>%
     names_to = "wavenumbers",
     values_to = "absorbance")
 usethis::use_data(greenland, overwrite = TRUE)
-
