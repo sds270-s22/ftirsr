@@ -9,7 +9,8 @@
 #' \item{sample_id}{Core Sample ID referring to location and content of sample}
 #' \item{bsi_percent}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
 #' \item{wavenumbers}{Wavenumber value (units = reciprocal centimeters)}
-#' \item{absorbance}{Absorbance levels}}
+#' \item{absorbance}{Absorbance levels}
+#' }
 #'
 #' @source Gathered from <https://github.com/sds-capstone/PLSmodel>
 "greenland"
@@ -25,7 +26,8 @@
 #' \item{sample_id}{Core Sample ID referring to location and content of sample}
 #' \item{bsi_percent}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
 #' \item{wavenumbers}{Wavenumber value (units = reciprocal centimeters)}
-#' \item{absorbance}{Absorbance levels}}
+#' \item{absorbance}{Absorbance levels}
+#' }
 #'
 #' @source Gathered from <https://github.com/sds-capstone/PLSmodel>
 "alaskaWetChemAbsorbance"

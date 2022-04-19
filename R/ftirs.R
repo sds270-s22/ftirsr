@@ -1,10 +1,12 @@
 #' A function that generates a dataframe in the proper format for the plsr model
 #' note to specify how to format data
-#' @param  The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
-#' @param  The filepath to the sample with wavenumbers you want to use
+#' @param dir_path The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
+#' @param wet_chem_path The filepath to the sample with wavenumbers you want to use
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @import readr
+#' @importFrom fs path_file
+#' @importFrom purrr map_dfr
 #' @export
 
 
@@ -20,7 +22,7 @@ read_ftirs_file <- function(single_filepath, ...){
 
     # use round()
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
-    mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
+    mutate(sample_id = tools::file_path_sans_ext(path_file(single_filepath)))
 
 }
 

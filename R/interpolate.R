@@ -3,11 +3,14 @@
 #' @param wavenumber The wavenumber vector
 #' @param absorbance The absorbance vector
 #' @param out_vec The wavenumber vector to be interpolated on
+#' @param wet_chem_csv Parameters used to interpolate wavenumber values
 #'
-#' @export
 #' @import dplyr
-#' @import stats
 #' @importFrom magrittr %>%
+#' @importFrom readr read_csv
+#' @importFrom stats approx na.omit
+
+#' @export
 
 
 #out_vec <-  readr::read_csv("AS-01 (8_24_16).0.csv")$wavenumber
@@ -16,10 +19,14 @@
 # need to have the out_vec a part of package bc this is a local path
 # so won't work for anyone outside of the projec
 interpolate_ftirs <- function(wavenumber, absorbance, out_vec =
+<<<<<<< HEAD
+                                read_csv("AS-01 (8_24_16).0.csv")$wavenumber) {
+=======
                                 readr::read_csv("data-raw/AS-01 (8_24_16).0.csv")$wavenumber) {
+>>>>>>> 1f220682402e009784bc22bd485f7ea948d9c066
 
   # The meat of the function: returns both the interpolated absorbance vector and the wavenumber vec.
-  tuple <- stats::approx(as.numeric(wavenumber), as.numeric(absorbance), xout = out_vec)
+  tuple <- approx(as.numeric(wavenumber), as.numeric(absorbance), xout = out_vec)
 
   # Binds the two vectors back into a data frame
   df <- as.data.frame(tuple)
