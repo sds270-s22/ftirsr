@@ -1,7 +1,7 @@
 #' A function that generates a tibble in the proper format for the plsr model
 #' note to specify how to format data
-#' @param dir_path The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
-#' @param wet_chem_path The filepath to the sample with wavenumbers you want to use
+#' @param single_filepath The filepath to the your FTIR spectroscopy sample.
+#' @param ...
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @import readr
@@ -27,15 +27,17 @@ read_ftirs_file <- function(single_filepath, ...) {
 
 #' A function that generates a dataframe in the proper format for the plsr model
 #' note to specify how to format data
-#' @param  The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
-#' @param  The filepath to the sample with wavenumbers you want to use
+#' @param dir_path filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples
+#' @param wet_chem_path Path to wet chemistry data the user wants to include in the ftirs dataframe. This is optional.
+#' @param format The desired format of the ftirs dataframe, either long or wide. Long is easier to store and wide is necessary to input into the model.
+#' @param ...
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @importFrom purrr map_dfr
 #' @import readr
 #' @export
 
-read_ftirs <- function(dir_path, wet_chem_path = NULL, ...) {
+read_ftirs <- function(dir_path, wet_chem_path = NULL, format,  ...) {
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
     purrr::map_dfr(read_ftirs_file) %>%
@@ -56,6 +58,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, ...) {
 
 #' Function that pivots the ftirs df to wider format that is necessary for the PLS model
 #' @param ftirs_data_long A long ftirs dataframe that contains columns for wavenumber and absorbance.
+#' @param ...
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @export
@@ -73,6 +76,7 @@ pivot_ftirs_wider <- function(ftirs_data_long, ...) {
 #' Function that pivots a wide ftirs dataframe back to a long format that is easier to store.
 #' @param ftirs_data_wide A wide ftirs dataframe that has a column for each wavenumber and a row for each sample.
 #' @param wet_chem A logical value that states if there is a column including wet chemistry data in the wide ftirs dataframe the user is inputting. `TRUE` means there is such column, `FALSE` denotes there is not.
+#' @param ...
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_longer
 #' @export
