@@ -7,7 +7,7 @@
 interpolate_ftirs(
   wavenumber,
   absorbance,
-  out_vec = readr::read_csv("AS-01 (8_24_16).0.csv")$wavenumber
+  out_vec = read_csv("AS-01 (8_24_16).0.csv")$wavenumber
 )
 }
 \arguments{
@@ -16,6 +16,8 @@ interpolate_ftirs(
 \item{absorbance}{The absorbance vector}
 
 \item{out_vec}{The wavenumber vector to be interpolated on}
+
+\item{wet_chem_csv}{Parameters used to interpolate wavenumber values}
 }
 \description{
 A function to interpolate a dataset
