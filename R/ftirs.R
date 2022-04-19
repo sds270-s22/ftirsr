@@ -10,7 +10,6 @@
 #' @export
 
 
-# add flag if want wide or long
 read_ftirs_file <- function(single_filepath, ...) {
   x <- read_csv(single_filepath, ...)
 
@@ -37,7 +36,9 @@ read_ftirs_file <- function(single_filepath, ...) {
 #' @import readr
 #' @export
 
-read_ftirs <- function(dir_path, wet_chem_path = NULL, format,  ...) {
+# is the format param too annoying? should default be long?
+# or maybe have "wide = TRUE" arg instead?
+read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long",  ...) {
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
     purrr::map_dfr(read_ftirs_file) %>%
@@ -52,7 +53,14 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format,  ...) {
       select(sample_id, bsi, everything())
   }
 
-  class(x) <- c("ftirs", class(x))
+#  class(x) <- c("ftirs", class(x))
+  # don't need this if we are calling long/wide
+  # is there a neater/less clunky way to do this?
+
+  if(format == "wide"){
+    x <- pivot_ftirs_wider(x)
+  }
+
   return(x)
 }
 

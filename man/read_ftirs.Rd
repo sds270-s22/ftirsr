@@ -5,10 +5,14 @@
 \title{A function that generates a dataframe in the proper format for the plsr model
 note to specify how to format data}
 \usage{
-read_ftirs(dir_path, wet_chem_path = NULL, ...)
+read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 }
 \arguments{
-\item{The}{filepath to the sample with wavenumbers you want to use}
+\item{dir_path}{filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples}
+
+\item{wet_chem_path}{Path to wet chemistry data the user wants to include in the ftirs dataframe. This is optional.}
+
+\item{format}{The desired format of the ftirs dataframe, either long or wide. Long is easier to store and wide is necessary to input into the model.}
 }
 \description{
 A function that generates a dataframe in the proper format for the plsr model

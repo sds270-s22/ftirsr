@@ -8,9 +8,7 @@ note to specify how to format data}
 read_ftirs_file(single_filepath, ...)
 }
 \arguments{
-\item{dir_path}{The filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples}
-
-\item{wet_chem_path}{The filepath to the sample with wavenumbers you want to use}
+\item{single_filepath}{The filepath to the your FTIR spectroscopy sample.}
 }
 \description{
 A function that generates a tibble in the proper format for the plsr model
