@@ -4,11 +4,12 @@
 #'
 #' @docType data
 #'
-#' @format A data frame with 28 rows and 3699 columns.
+#' @format A data frame with 103516 rows and 4 columns.
 #' \describe{
 #' \item{sample_id}{Core Sample ID referring to location and content of sample}
 #' \item{bsi_percent}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
 #' \item{wavenumbers}{Wavenumber value (units = reciprocal centimeters)}
+#' \item{absorbance}{Absorbance levels}
 #'
 #' @source Gathered from <https://github.com/sds-capstone/PLSmodel>
 "greenland"
@@ -19,13 +20,14 @@
 #'
 #' @docType data
 #'
-#' @format A data frame with 188 rows and 3699 columns.
+#' @format A data frame with 193846 rows and 4 columns.
 #' \describe{
 #' \item{sample_id}{Core Sample ID referring to location and content of sample}
 #' \item{bsi_percent}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
 #' \item{wavenumbers}{Wavenumber value (units = reciprocal centimeters)}
+#' \item{absorbance}{Absorbance levels}
 #'
 #' @source Gathered from <https://github.com/sds-capstone/PLSmodel>
-"greenland"
+"alaskaWetChemAbsorbance"
 
 
