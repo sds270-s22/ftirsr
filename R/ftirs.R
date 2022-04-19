@@ -42,7 +42,7 @@ read_ftirs <- function(dir_path, wet_chem_path, ...){
     purrr::map_dfr(read_ftirs_file)
 
   # need to universalize with "sample_id" and "Sample"
-  # MAke wet chem optional!
+  # Make wet chem optional!
   wet_chem <- read_csv(wet_chem_path)
   x <- left_join(x, wet_chem, by = c("sample_id" = "Sample"))
 
