@@ -11,7 +11,7 @@
 
 
 # add flag if want wide or long
-read_ftirs_file <- function(single_filepath, ...){
+read_ftirs_file <- function(single_filepath, ...) {
   x <- read_csv(single_filepath, ...)
 
   x <- x %>%
@@ -20,10 +20,9 @@ read_ftirs_file <- function(single_filepath, ...){
     ## not sure what would be more standard
     select(-1)
 
-    # use round()
+  # use round()
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(path_file(single_filepath)))
-
 }
 
 #' A function that generates a dataframe in the proper format for the plsr model
@@ -36,17 +35,17 @@ read_ftirs_file <- function(single_filepath, ...){
 #' @import readr
 #' @export
 
-read_ftirs <- function(dir_path, wet_chem_path, ...){
+read_ftirs <- function(dir_path, wet_chem_path = NULL, ...) {
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
     purrr::map_dfr(read_ftirs_file)
 
-  # need to universalize with "sample_id" and "Sample"
-  # Make wet chem optional!
-  wet_chem <- read_csv(wet_chem_path)
-  x <- left_join(x, wet_chem, by = c("sample_id" = "Sample"))
+  if (!is.null(wet_chem_path)) {
+    wet_chem <- read_csv(wet_chem_path)
+    # need to universalize with "sample_id" and "Sample"
+    x <- left_join(x, wet_chem, by = c("sample_id" = "Sample"))
+  }
 
   class(x) <- c("ftirs", class(x))
   return(x)
 }
-
