@@ -8,7 +8,7 @@ note to specify how to format data}
 generate_df(
   your_csv_folder,
   wavenumbers = "AS-01 (8_24_16).0.csv",
-  wet_chem_csv
+  wet_chem_csv = NULL
 )
 }
 \arguments{
