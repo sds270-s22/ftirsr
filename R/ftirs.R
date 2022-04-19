@@ -7,6 +7,8 @@
 #' @import readr
 #' @export
 
+
+# add flag if want wide or long
 read_ftirs_file <- function(single_filepath, ...){
   x <- read_csv(single_filepath, ...)
 
@@ -16,6 +18,7 @@ read_ftirs_file <- function(single_filepath, ...){
     ## not sure what would be more standard
     select(-1)
 
+    # use round()
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 
