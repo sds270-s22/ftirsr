@@ -19,7 +19,7 @@
 # need to have the out_vec a part of package bc this is a local path
 # so won't work for anyone outside of the projec
 interpolate_ftirs <- function(wavenumber, absorbance,
-                              out_vec = read_csv("data-raw/AS-01 (8_24_16).0.csv")$wavenumber) {
+                              out_vec = rounded_wavenumbers$wavenumber) {
 
   # The meat of the function: returns both the interpolated absorbance vector and the wavenumber vec.
   tuple <- approx(as.numeric(wavenumber), as.numeric(absorbance), xout = out_vec)

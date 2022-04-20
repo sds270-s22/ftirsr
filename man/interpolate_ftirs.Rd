@@ -7,7 +7,7 @@
 interpolate_ftirs(
   wavenumber,
   absorbance,
-  out_vec = read_csv("data-raw/AS-01 (8_24_16).0.csv")$wavenumber
+  out_vec = rounded_wavenumbers$wavenumber
 )
 }
 \arguments{
