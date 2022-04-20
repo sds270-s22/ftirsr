@@ -14,7 +14,7 @@ library(tidyverse)
 
 ```{r}
 greenland_sites <- greenland %>% 
-  select(sample_id, bsi_percent)
+  select(sample_id, bsi)
 ```
 
 ```{r}
@@ -24,7 +24,7 @@ greenland_wavenumbers <- greenland %>%
     names_to = "Wavenumbers",
     values_to = "Value"
   )%>%
-  select(-c(bsi_percent))
+  select(-c(bsi))
 ```
 
 ```{r}
@@ -41,7 +41,7 @@ greenland_long <- greenland %>%
 
 ```{r}
 alaska_sites <- alaskaWetChemAbsorbance %>% 
-  select(sample_id, bsi_percent)
+  select(sample_id, bsi)
 ```
 
 ```{r}
@@ -51,7 +51,7 @@ alaska_wavenumbers <- alaskaWetChemAbsorbance %>%
     names_to = "Wavenumbers",
     values_to = "Value"
   )%>%
-  select(-c(bsi_percent))
+  select(-c(bsi))
 ```
 
 
