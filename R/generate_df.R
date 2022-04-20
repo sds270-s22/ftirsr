@@ -86,7 +86,7 @@ generate_df <- function(your_csv_folder, wavenumbers = "AS-01 (8_24_16).0.csv",
   if(!is.null(wet_chem_csv)){
     your_df <- full_join(absorbance_df, wet_chem, by = "sample") %>%
       na.omit() %>%
-      select(bsi_percent, toc_percent, everything()) %>%
+      select(bsi, toc_percent, everything()) %>%
       column_to_rownames(var = "sample")
   }else{
     your_df <- absorbance_df

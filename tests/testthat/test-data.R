@@ -7,7 +7,7 @@ test_that("Checking greenland rows, cols", {
 })
 
 test_that("Checking classes", {
-  expect_is(greenland$bsi_percent, "numeric")
+  expect_is(greenland$bsi, "numeric")
   expect_is(greenland$sample_id, "character")
   expect_is(greenland$absorbance, "numeric")
 })
@@ -19,7 +19,7 @@ test_that("Checking alaskaWetChemAbsorbance rows, cols", {
 })
 
 test_that("Checking classes", {
-  expect_is(alaskaWetChemAbsorbance$bsi_percent, "numeric")
+  expect_is(alaskaWetChemAbsorbance$bsi, "numeric")
   expect_is(alaskaWetChemAbsorbance$sample_id, "character")
   expect_is(alaskaWetChemAbsorbance$absorbance, "numeric")
 })
