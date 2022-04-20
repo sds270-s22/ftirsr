@@ -12,7 +12,6 @@
 
 read_ftirs_file <- function(single_filepath, ...) {
   x <- read_csv(single_filepath, ...)
-
   x <- x %>%
     as_tibble() %>%
     ## this next line might not be relevant if we specify not to have index col
