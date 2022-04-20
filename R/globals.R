@@ -1,2 +1,2 @@
-utils::globalVariables(c("wavenumber", "absorbance", "bsi_percent",
+utils::globalVariables(c("wavenumber", "absorbance", "bsi",
                          "toc_percent", "x", "y"))
