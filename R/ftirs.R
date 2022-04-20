@@ -70,6 +70,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long",  ...) {
 #' @param ...
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
+#' @importFrom tibble column_to_rownames
 #' @export
 
 pivot_ftirs_wider <- function(ftirs_data_long, ...) {
@@ -77,7 +78,10 @@ pivot_ftirs_wider <- function(ftirs_data_long, ...) {
     pivot_wider(
       names_from = "wavenumber",
       values_from = "absorbance"
-    )
+    )  %>%
+    ## Not positive this is necessary to make `sample_id` a rowname
+    column_to_rownames(var = "sample_id")
+
   class(ftirs_data_wide) <- c("ftirs", class(ftirs_data_wide))
   return(ftirs_data_wide)
 }
@@ -91,16 +95,19 @@ pivot_ftirs_wider <- function(ftirs_data_long, ...) {
 #' @export
 
 pivot_ftirs_longer <- function(ftirs_data_wide, wet_chem, ...) {
+    ftirs_data_wide <- ftirs_data_wide %>%
+      rownames_to_column(var = "sample_id")
+
     if(wet_chem == TRUE){
       ftirs_data_long <- ftirs_data_wide %>%
       pivot_longer(3:1884,
-      names_to = "wavenumbers",
+      names_to = "wavenumber",
       values_to = "absorbance"
     )
     }else{
       ftirs_data_long <- ftirs_data_wide %>%
         pivot_longer(2:1883,
-        names_to = "wavenumbers",
+        names_to = "wavenumber",
         values_to = "absorbance"
         )}
   class(ftirs_data_long) <- c("ftirs", class(ftirs_data_long))

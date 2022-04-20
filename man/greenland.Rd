@@ -8,8 +8,8 @@
 A data frame with 103516 rows and 4 columns.
 \describe{
 \item{sample_id}{Core Sample ID referring to location and content of sample}
-\item{bsi_percent}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
-\item{wavenumbers}{Wavenumber value (units = reciprocal centimeters)}
+\item{bsi}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
+\item{wavenumber}{Wavenumber value (units = reciprocal centimeters)}
 \item{absorbance}{Absorbance levels}
 }
 }
