@@ -1,7 +1,5 @@
 ## code to prepare `rounded_wavenumbers` vector (wavenumbers to interpolate onto, `out_vec` in function) for interpolation goes here
 library(dplyr)
-library(janitor)
-library(tidyr)
 library(readr)
 library(magrittr)
 

@@ -42,7 +42,8 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long",  ...) {
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
     purrr::map_dfr(read_ftirs_file) %>%
-    select(sample_id, everything())
+    select(sample_id, everything()) %>%
+    format(scientific = FALSE)
 
   if (!is.null(wet_chem_path)) {
     wet_chem <- read_csv(wet_chem_path)
