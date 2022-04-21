@@ -4,7 +4,6 @@
 ## not sure if need to doc bc internal
 ## need to specify internal?
 library(pls)
-library(stats)
 library(magrittr)
 library(plsr)
 library(dplyr)
