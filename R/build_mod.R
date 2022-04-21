@@ -1,6 +1,8 @@
 #' A function that predicts bsi content based on our model with your data
 #' @param your_data must be in the wide format -> looks like it might not have to be!
+#' @param ... Other arguments passed on to methods. Not currently used.
 #' @import pls
+#' @importFrom stats predict
 #' @export
 
 # generic function

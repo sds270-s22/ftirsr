@@ -8,6 +8,8 @@ predict_ftirs(your_data, ...)
 }
 \arguments{
 \item{your_data}{must be in the wide format -> looks like it might not have to be!}
+
+\item{...}{Other arguments passed on to methods. Not currently used.}
 }
 \description{
 A function that predicts bsi content based on our model with your data
