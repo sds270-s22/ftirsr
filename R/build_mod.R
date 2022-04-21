@@ -5,6 +5,9 @@
 
 # generic function
 predict.ftirs <- function(your_data, ...){
+  # do we want this to be a method? Bc we don't necessarily want to
+  # predict with our model, or our full spec model
+
 
   # to predict your samples with our model
   # should call bsi or something more generic?

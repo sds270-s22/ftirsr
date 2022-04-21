@@ -19,28 +19,28 @@ pivot_ftirs_longer(ftirs_data_wide, wet_chem, ...)
 \arguments{
 \item{single_filepath}{The filepath to the your FTIR spectroscopy sample.}
 
-\item{dir_path}{filepath to the your folder that contains the csv files for all your FTIR spectroscopy samples}
+\item{...}{Other arguments passed on to methods. Not currently used.}
 
-\item{wet_chem_path}{Path to wet chemistry data the user wants to include in the ftirs dataframe. This is optional.}
+\item{dir_path}{Filepath to the folder that contains the csv files with FTIRS samples. Each file should be formatted such that there are three columns; index, \code{wavenumber} (numeric), and \code{absorbance} (numeric).}
 
-\item{format}{The desired format of the ftirs dataframe, either long or wide. Long is easier to store and wide is necessary to input into the model.}
+\item{wet_chem_path}{An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.}
 
-\item{ftirs_data_long}{A long ftirs dataframe that contains columns for wavenumber and absorbance.}
+\item{format}{The desired format of the FTIRS dataframe; \code{long} (default) or \code{wide}.}
 
-\item{ftirs_data_wide}{A wide ftirs dataframe that has a column for each wavenumber and a row for each sample.}
+\item{ftirs_data_long}{A long, tidy format FTIRS dataframe.}
 
-\item{wet_chem}{A logical value that states if there is a column including wet chemistry data in the wide ftirs dataframe the user is inputting. \code{TRUE} means there is such column, \code{FALSE} denotes there is not.}
+\item{ftirs_data_wide}{A wide, non-tidy FTIRS dataframe. Columns = wavenumber, rows = sample_id, and values = absorbance.}
+
+\item{wet_chem}{A logical value (\code{TRUE} or \code{FALSE}) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.}
 }
 \description{
 FTIRS class
 
-A function that generates a tibble in the proper format for the plsr model
-note to specify how to format data
+A function that generates a tibble from a single FTIRS sample
 
-A function that generates a dataframe in the proper format for the plsr model
-note to specify how to format data
+A function that generates a tidy data frame binding multiple FTIRS samples together
 
-Function that pivots the ftirs df to wider format that is necessary for the PLS model
+Function that pivots the FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
 
-Function that pivots a wide ftirs dataframe back to a long format that is easier to store.
+Function that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
 }

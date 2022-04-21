@@ -16,8 +16,6 @@ interpolate_ftirs(
 \item{absorbance}{The absorbance vector}
 
 \item{out_vec}{The wavenumber vector to be interpolated on}
-
-\item{wet_chem_csv}{Parameters used to interpolate wavenumber values}
 }
 \description{
 A function to interpolate a dataset

@@ -8,5 +8,7 @@ wavenumbers <- read_csv("data-raw/AS-01\ (8_24_16).0.csv")
 ## in order to include as a dataset
 rounded_wavenumbers <- round(wavenumbers, digits = 0) %>%
   select(-1) %>%
-  rename(dummy_absorbance = absorbance)
+  rename(dummy_absorbance = absorbance) %>%
+  filter(wavenumber != 368)
+
 usethis::use_data(rounded_wavenumbers, internal = TRUE, overwrite = TRUE)
