@@ -45,6 +45,7 @@ predict_ftirs <- function(your_data, ...){
 
   preds <- as.data.frame(predict(our_mod, data = your_data)) %>%
     rownames_to_column(var = "sample_id")
+  ## these are the wrong sample_id names
   #eventually just return for component we want
 
 
