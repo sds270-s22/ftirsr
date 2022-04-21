@@ -8,7 +8,7 @@
 #predict_ftirs
 
 
-predict.ftirs <- function(your_data, ...){
+predict_ftirs <- function(your_data, ...){
   # do we want this to be a method? Bc we don't necessarily want to
   # predict with our model, or our full spec model
 
@@ -34,7 +34,7 @@ predict.ftirs <- function(your_data, ...){
   #   pivot_ftirs_wider()%>%
   #   select(-1883)
   #
-  combined_artic_df_wide <- rbind(alaska, greenland) %>%
+  combined_artic_df_wide <- rbind(greenland, alaska) %>%
     pivot_ftirs_wider()
 
   our_mod <- plsr(bsi~., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
@@ -43,7 +43,11 @@ predict.ftirs <- function(your_data, ...){
 
   # is this how to access our object/most efficient?
 
-  predict(our_mod, data = your_data)
+  preds <- as.data.frame(predict(our_mod, data = your_data)) %>%
+    rownames_to_column(var = "sample_id")
+  #eventually just return for component we want
+
+
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
   # should plot be included within this function or another thing?
   # probably something else because we can only return one thing and

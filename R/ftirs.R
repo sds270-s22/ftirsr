@@ -104,7 +104,7 @@ pivot_ftirs_longer <- function(ftirs_data_wide, wet_chem, ...) {
 
   if (wet_chem == TRUE) {
     ftirs_data_long <- ftirs_data_wide %>%
-      pivot_longer(2:1882,
+      pivot_longer(3:1883,
         names_to = "wavenumber",
         values_to = "absorbance"
       )
