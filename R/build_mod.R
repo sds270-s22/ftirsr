@@ -4,7 +4,9 @@
 #' @export
 
 # generic function
-predict.ftirs <- function(your_data, ...){
+# but can't be rn bc the thing I'm putting in isn't actually an ftirs
+#predict_ftirs
+predict_ftirs <- function(your_data, ...){
   # do we want this to be a method? Bc we don't necessarily want to
   # predict with our model, or our full spec model
 
