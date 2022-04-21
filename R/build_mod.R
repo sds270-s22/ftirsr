@@ -1,7 +1,6 @@
 #' A function that predicts bsi content based on our model with your data
 #' @param your_data must be in the wide format
 #' @import pls
-#' @import stats
 #' @export
 
 predict_bsi <- function(your_data, ...){
