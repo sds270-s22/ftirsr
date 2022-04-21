@@ -3,7 +3,8 @@
 #' @import pls
 #' @export
 
-predict_bsi <- function(your_data, ...){
+# generic function
+predict.ftirs <- function(your_data, ...){
 
   # to predict your samples with our model
   # should call bsi or something more generic?
