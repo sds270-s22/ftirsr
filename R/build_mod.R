@@ -1,11 +1,13 @@
 #' A function that predicts bsi content based on our model with your data
-#' @param your_data must be in the wide format
+#' @param your_data must be in the wide format -> looks like it might not have to be!
 #' @import pls
 #' @export
 
 # generic function
 # but can't be rn bc the thing I'm putting in isn't actually an ftirs
 #predict_ftirs
+
+
 predict_ftirs <- function(your_data, ...){
   # do we want this to be a method? Bc we don't necessarily want to
   # predict with our model, or our full spec model
