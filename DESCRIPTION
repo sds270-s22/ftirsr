@@ -22,7 +22,8 @@ Imports:
     janitor,
     fs,
     tidyr,
-    tibble
+    tibble,
+    pls
 Depends: 
     R (>= 2.10)
 LazyData: true
