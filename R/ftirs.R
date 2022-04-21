@@ -59,7 +59,9 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   if (format == "wide") {
     x <- pivot_ftirs_wider(x)
   }
-
+  #not sure if this line is necessary but don't see where else we are doing it
+  # is it in the declaration?
+  class(x) <- c("ftirs", class(x))
   return(x)
 }
 
