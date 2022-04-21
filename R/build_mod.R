@@ -27,12 +27,15 @@ predict.ftirs <- function(your_data, ...){
   #   pivot_ftirs_wider()%>%
   #   select(-1883)
   #
-  # our_mod <- plsr(bsi~., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
+  combined_artic_df_wide <- rbind(alaska, greenland) %>%
+    pivot_ftirs_wider()
+
+  our_mod <- plsr(bsi~., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
   #summary(our_mod)
   # should summary be included?
 
   # is this how to access our object/most efficient?
-  load("~/plsr/our_mod.rda")
+
   predict(our_mod, data = your_data)
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
   # should plot be included within this function or another thing?
@@ -78,7 +81,7 @@ predict.ftirs <- function(your_data, ...){
 # your_data <- read_ftirs("~/PLSmodel/Samples/alaska_csv") %>%
 #   pivot_ftirs_wider() %>%
 #   select(-1882)
-#
+
 # create_new_mod <- function(...){
 #   # not sure if this is necessary/what it contributes besides just plsr()
 # }
