@@ -3,8 +3,6 @@
 #' @param wavenumber The wavenumber vector
 #' @param absorbance The absorbance vector
 #' @param out_vec The wavenumber vector to be interpolated on
-#' @param wet_chem_csv Parameters used to interpolate wavenumber values
-#'
 #' @import dplyr
 #' @importFrom magrittr %>%
 #' @importFrom readr read_csv

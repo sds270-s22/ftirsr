@@ -5,7 +5,7 @@
 \alias{alaska}
 \title{Absorbance Dataset From Alaska}
 \format{
-A data frame with 193846 rows and 4 columns.
+A data frame with 193743 rows and 4 columns.
 \describe{
 \item{sample_id}{Core Sample ID referring to location and content of sample}
 \item{bsi}{Percentage of Biogenic Silica in Sample, determined by a wet chemical process}
