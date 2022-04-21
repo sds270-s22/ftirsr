@@ -8,7 +8,7 @@
 #predict_ftirs
 
 
-predict_ftirs <- function(your_data, ...){
+predict.ftirs <- function(your_data, ...){
   # do we want this to be a method? Bc we don't necessarily want to
   # predict with our model, or our full spec model
 
