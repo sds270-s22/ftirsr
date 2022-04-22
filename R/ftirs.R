@@ -1,4 +1,5 @@
 #' FTIRS class
+#' A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model
 #' @name ftirs
 NULL
 
@@ -22,7 +23,6 @@ read_ftirs_file <- function(single_filepath, ...) {
     ## not sure what would be more standard
     select(-1)
 
-  # use round()
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 }
@@ -45,16 +45,16 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     purrr::map_dfr(read_ftirs_file) %>%
     select(sample_id, everything()) %>%
     format(scientific = FALSE)
-  ## add this as own function?
+
   if (!is.null(wet_chem_path)) {
     wet_chem <- read_csv(wet_chem_path)
-    # need to universalize with "sample_id" and "Sample"
-    # also BSi vs. bsi
-    # don't really want to list `bsi` because could be adding toc!
-    sample_col_name <- names(wet_chem)[1]
 
+    sample_col_name <- names(wet_chem)[1]
+    compound_col_name <- names(wet_chem)[2]
+  # ideally, you can note if you're adding bsi or toc data or something else
+  # but for now, users can change it if it's not bsi
     x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
-      rename(bsi = Bsi) %>% # throw an error if they don't put sample col name
+      rename(bsi = compound_col_name) %>%
       select(sample_id, bsi, everything())
   }
   class(x) <- c("ftirs", class(x))
@@ -104,15 +104,18 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
     rownames_to_column(var = "sample_id") %>%
     as_tibble()
 
+  upper_bound <- ncol(ftirs_data_wide)
+
   if (wet_chem == TRUE) {
     ftirs_data_long <- ftirs_data_wide %>%
-      pivot_longer(3:1883,
+      pivot_longer(3:all_of(upper_bound),
         names_to = "wavenumber",
         values_to = "absorbance"
       )
   } else {
     ftirs_data_long <- ftirs_data_wide %>%
-      pivot_longer(1:1881,
+      # these numbers look off, but it's because there's an additional col now
+      pivot_longer(2:all_of(upper_bound),
         names_to = "wavenumber",
         values_to = "absorbance"
       )
@@ -124,6 +127,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
 #' Function that checks if an object has the FTIRS class format
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
+#' @export
 is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }

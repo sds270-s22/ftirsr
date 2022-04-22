@@ -7,7 +7,8 @@
 interpolate_ftirs(
   wavenumber,
   absorbance,
-  out_vec = rounded_wavenumbers$wavenumber
+  out_vec = rounded_wavenumbers$wavenumber,
+  ...
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ interpolate_ftirs(
 \item{absorbance}{The absorbance vector}
 
 \item{out_vec}{The wavenumber vector to be interpolated on}
+
+\item{...}{Other arguments passed on to methods. Not currently used.}
 }
 \description{
 A function to interpolate a dataset

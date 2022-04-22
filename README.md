@@ -32,6 +32,6 @@ This is a basic example which shows you how to solve a common problem:
 library(plsr)
 
 # This shows finding the maximum biogenic silica percentage in the dataset
-max(greenland$bsi_percent)
+max(greenland$bsi)
 #> [1] 30.61
 ```

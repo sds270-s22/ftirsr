@@ -7,7 +7,8 @@
 \alias{pivot_wider.ftirs}
 \alias{pivot_longer.ftirs}
 \alias{predict.ftirs}
-\title{FTIRS class}
+\title{FTIRS class
+A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model}
 \usage{
 read_ftirs_file(single_filepath, ...)
 
@@ -40,6 +41,7 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 }
 \description{
 FTIRS class
+A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model
 
 A function that generates a tibble from a single FTIRS sample
 
