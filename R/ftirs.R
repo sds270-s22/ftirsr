@@ -76,8 +76,8 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' @importFrom tibble column_to_rownames
 #' @export
 
-pivot_ftirs_wider <- function(ftirs_data_long, ...) {
-  ftirs_data_wide <- ftirs_data_long %>%
+pivot_wider.ftirs <- function(ftirs_data_long, ...) {
+  ftirs_data_wide <- as_tibble(ftirs_data_long) %>%
     pivot_wider(
       names_from = "wavenumber",
       values_from = "absorbance"
