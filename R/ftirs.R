@@ -120,3 +120,14 @@ pivot_ftirs_longer <- function(ftirs_data_wide, wet_chem, ...) {
   class(ftirs_data_long) <- c("ftirs", class(ftirs_data_long))
   return(ftirs_data_long)
 }
+
+#' Function that checks if an object has the FTIRS class format
+#' @param obj any R object
+#' @param ... Other arguments passed on to methods. Not currently used.
+is.ftirs <- function(obj, ...){
+  "ftirs" %in% class(obj)
+}
+
+
+
+
