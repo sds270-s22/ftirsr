@@ -45,14 +45,16 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     purrr::map_dfr(read_ftirs_file) %>%
     select(sample_id, everything()) %>%
     format(scientific = FALSE)
-
+## add this as own function?
   if (!is.null(wet_chem_path)) {
     wet_chem <- read_csv(wet_chem_path)
     # need to universalize with "sample_id" and "Sample"
     # also BSi vs. bsi
     # don't really want to list `bsi` because could be adding toc!
-    x <- left_join(x, wet_chem, by = c("sample_id" = "Sample")) %>%
-      rename(bsi = Bsi) %>%
+    sample_col_name <- names(wet_chem)[1]
+
+    x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
+      rename(bsi = Bsi) %>% #throw an error if they don't put sample col name
       select(sample_id, bsi, everything())
   }
 
