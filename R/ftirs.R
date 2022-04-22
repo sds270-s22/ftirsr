@@ -104,15 +104,18 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
     rownames_to_column(var = "sample_id") %>%
     as_tibble()
 
+  upper_bound <- ncol(ftirs_data_wide)
+
   if (wet_chem == TRUE) {
     ftirs_data_long <- ftirs_data_wide %>%
-      pivot_longer(3:1883,
+      pivot_longer(3:all_of(upper_bound),
         names_to = "wavenumber",
         values_to = "absorbance"
       )
   } else {
     ftirs_data_long <- ftirs_data_wide %>%
-      pivot_longer(1:1881,
+      # these numbers look off, but it's because there's an additional col now
+      pivot_longer(2:all_of(upper_bound),
         names_to = "wavenumber",
         values_to = "absorbance"
       )
@@ -124,6 +127,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
 #' Function that checks if an object has the FTIRS class format
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
+#' @export
 is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }

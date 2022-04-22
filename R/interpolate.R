@@ -3,6 +3,7 @@
 #' @param wavenumber The wavenumber vector
 #' @param absorbance The absorbance vector
 #' @param out_vec The wavenumber vector to be interpolated on
+#' @param ... Other arguments passed on to methods. Not currently used.
 #' @import dplyr
 #' @importFrom magrittr %>%
 #' @importFrom readr read_csv
@@ -11,7 +12,7 @@
 #' @export
 
 interpolate_ftirs <- function(wavenumber, absorbance,
-                              out_vec = rounded_wavenumbers$wavenumber) {
+                              out_vec = rounded_wavenumbers$wavenumber, ...) {
 
   # The meat of the function: returns both the interpolated absorbance vector and the wavenumber vec.
   tuple <- approx(as.numeric(wavenumber), as.numeric(absorbance), xout = out_vec)
