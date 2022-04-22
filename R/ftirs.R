@@ -45,7 +45,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     purrr::map_dfr(read_ftirs_file) %>%
     select(sample_id, everything()) %>%
     format(scientific = FALSE)
-## add this as own function?
+  ## add this as own function?
   if (!is.null(wet_chem_path)) {
     wet_chem <- read_csv(wet_chem_path)
     # need to universalize with "sample_id" and "Sample"
@@ -54,18 +54,16 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     sample_col_name <- names(wet_chem)[1]
 
     x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
-      rename(bsi = Bsi) %>% #throw an error if they don't put sample col name
+      rename(bsi = Bsi) %>% # throw an error if they don't put sample col name
       select(sample_id, bsi, everything())
   }
-
+  class(x) <- c("ftirs", class(x))
   if (format == "wide") {
-    x <- pivot_ftirs_wider(x)
-  }else{
-    class(x) <- c("ftirs", class(x))
+    x <- pivot_wider(x)
   }
-  #not sure if this line is necessary but don't see where else we are doing it
+  # not sure if this line is necessary but don't see where else we are doing it
   # is it in the declaration?
- # class(x) <- c("ftirs", class(x))
+  # class(x) <- c("ftirs", class(x))
   return(x)
 }
 
@@ -97,12 +95,14 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
 #' @param wet_chem A logical value (`TRUE` or `FALSE`) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @importFrom magrittr %>%
+#' @importFrom tibble rownames_to_column
 #' @importFrom tidyr pivot_longer
 #' @export
 
-pivot_ftirs_longer <- function(ftirs_data_wide, wet_chem, ...) {
+pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
   ftirs_data_wide <- ftirs_data_wide %>%
-    rownames_to_column(var = "sample_id")
+    rownames_to_column(var = "sample_id") %>%
+    as_tibble()
 
   if (wet_chem == TRUE) {
     ftirs_data_long <- ftirs_data_wide %>%
@@ -124,10 +124,30 @@ pivot_ftirs_longer <- function(ftirs_data_wide, wet_chem, ...) {
 #' Function that checks if an object has the FTIRS class format
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
-is.ftirs <- function(obj, ...){
+is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
 
+#' A function that predicts bsi content based on our model with your data
+#' @rdname ftirs
+#' @param your_data must be in the wide format -> looks like it might not have to be!
+#' @param ... Other arguments passed on to methods. Not currently used.
+#' @import pls
+#' @importFrom tibble rownames_to_column
+#' @importFrom stats predict
+#' @export
+
+predict.ftirs <- function(your_data, ...) {
+  combined_artic_df_wide <- rbind(greenland, alaska) %>%
+    pivot_wider()
+
+  our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
 
 
+  preds <- as.data.frame(predict(our_mod, data = your_data)) %>%
+    rownames_to_column(var = "sample_id")
+  ## these are the wrong sample_id names
+  # eventually just return for component we want
 
+  # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
+}

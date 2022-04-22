@@ -10,12 +10,6 @@
 
 #' @export
 
-
-# out_vec <-  readr::read_csv("AS-01 (8_24_16).0.csv")$wavenumber
-# denote that this only really works with a file and can't work too short
-# pass the dots in for approx?
-# need to have the out_vec a part of package bc this is a local path
-# so won't work for anyone outside of the projec
 interpolate_ftirs <- function(wavenumber, absorbance,
                               out_vec = rounded_wavenumbers$wavenumber) {
 

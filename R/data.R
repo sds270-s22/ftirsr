@@ -31,5 +31,3 @@
 #'
 #' @source Gathered from <https://github.com/sds-capstone/PLSmodel>
 "alaska"
-
-

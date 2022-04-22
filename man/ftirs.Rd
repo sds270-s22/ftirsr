@@ -4,17 +4,20 @@
 \alias{ftirs}
 \alias{read_ftirs_file}
 \alias{read_ftirs}
-\alias{pivot_ftirs_wider}
-\alias{pivot_ftirs_longer}
+\alias{pivot_wider.ftirs}
+\alias{pivot_longer.ftirs}
+\alias{predict.ftirs}
 \title{FTIRS class}
 \usage{
 read_ftirs_file(single_filepath, ...)
 
 read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
-pivot_ftirs_wider(ftirs_data_long, ...)
+\method{pivot_wider}{ftirs}(ftirs_data_long, ...)
 
-pivot_ftirs_longer(ftirs_data_wide, wet_chem, ...)
+\method{pivot_longer}{ftirs}(ftirs_data_wide, wet_chem, ...)
+
+\method{predict}{ftirs}(your_data, ...)
 }
 \arguments{
 \item{single_filepath}{The filepath to the your FTIR spectroscopy sample.}
@@ -32,6 +35,8 @@ pivot_ftirs_longer(ftirs_data_wide, wet_chem, ...)
 \item{ftirs_data_wide}{A wide, non-tidy FTIRS dataframe. Columns = wavenumber, rows = sample_id, and values = absorbance.}
 
 \item{wet_chem}{A logical value (\code{TRUE} or \code{FALSE}) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.}
+
+\item{your_data}{must be in the wide format -> looks like it might not have to be!}
 }
 \description{
 FTIRS class
@@ -43,4 +48,6 @@ A function that generates a tidy data frame binding multiple FTIRS samples toget
 Function that pivots the FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
 
 Function that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
+
+A function that predicts bsi content based on our model with your data
 }
