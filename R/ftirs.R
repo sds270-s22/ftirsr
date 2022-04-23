@@ -23,6 +23,11 @@ read_ftirs_file <- function(single_filepath, ...) {
     ## not sure what would be more standard
     select(-1)
 
+  col_names <- names(x)
+  x <- x %>%
+    rename(wavenumber = col_names[1],
+           absorbance = col_names[2])
+
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 }
