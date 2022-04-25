@@ -181,7 +181,8 @@ is.ftirs <- function(obj, ...) {
 predict.ftirs <- function(your_data, ...) {
   mod <- arctic_mod()
   preds <- as.data.frame(predict(mod, data = your_data))
-  ## these are the wrong sample_id names
+  ## include sample id
+  # not sure if these are the right predictions?
   # eventually just return for component we want
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
