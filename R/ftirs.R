@@ -88,6 +88,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' @importFrom readr read_csv
 #' @importFrom magrittr %>%
 #' @import dplyr
+#' @export
 
 read_wet_chem <- function(filepath, data) {
   wet_chem <- read_csv(filepath)
@@ -191,3 +192,4 @@ predict.ftirs <- function(your_data, ...) {
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
 }
+
