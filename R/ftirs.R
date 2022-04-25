@@ -6,6 +6,7 @@ NULL
 #' A function that generates a tibble from a single FTIRS sample
 #' @rdname ftirs
 #' @param single_filepath The filepath to the your FTIR spectroscopy sample.
+#' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @importFrom magrittr %>%
 #' @import dplyr
@@ -15,7 +16,7 @@ NULL
 #' @export
 
 
-read_ftirs_file <- function(single_filepath, ...) {
+read_ftirs_file <- function(single_filepath, interpolate, ...) {
   x <- read_csv(single_filepath, ...)
   x <- x %>%
     as_tibble()
@@ -37,9 +38,15 @@ read_ftirs_file <- function(single_filepath, ...) {
           labels match the contents of the columns.")
   }
 
+  if(interpolate == TRUE){
+  x <- interpolate_ftirs(x$wavenumber, x$absorbance)
+  }
 
-  x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
+  # Attach sample_id to each observation
+  x <- x %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
+  return(x)
+
 }
 
 #' A function that generates a tidy data frame binding multiple FTIRS samples together
@@ -57,7 +64,7 @@ read_ftirs_file <- function(single_filepath, ...) {
 read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
-    map_dfr(read_ftirs_file) %>%
+    map_dfr(read_ftirs_file, interpolate = TRUE) %>%
     select(sample_id, everything()) %>%
     format(scientific = FALSE)
 
@@ -87,10 +94,10 @@ read_wet_chem <- function(filepath, data) {
 
   sample_col_name <- names(wet_chem)[1]
   compound_col_name <- names(wet_chem)[2]
-  # ideally, you can note if you're adding bsi or toc data or something else
-  # but for now, users can change it if it's not bsi
   data <- left_join(data, wet_chem, by = c("sample_id" = sample_col_name)) %>%
     rename(bsi = all_of(compound_col_name)) %>%
+    # ideally, you can note if you're adding bsi or toc data or something else
+    # but for now, users can change it if it's not bsi
     select(sample_id, bsi, everything())
   return(data)
 }
@@ -112,7 +119,6 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
       names_from = "wavenumber",
       values_from = "absorbance"
     ) %>%
-    ## Not positive this is necessary to make `sample_id` a rowname
     column_to_rownames(var = "sample_id")
 
   class(ftirs_data_wide) <- c("ftirs", class(ftirs_data_wide))
