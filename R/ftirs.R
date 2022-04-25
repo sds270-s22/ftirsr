@@ -20,19 +20,19 @@ read_ftirs_file <- function(single_filepath, ...) {
   x <- x %>%
     as_tibble()
 
-  if(ncol(x)>2){
+  if (ncol(x) > 2) {
     x <- x %>%
       select(-1)
     warning("Deleted presumed index column.")
   }
 
-# put in function?
-
   col_names <- names(x)
-  if(FALSE %in% ifelse(col_names == c("wavenumber", "absorbance"), TRUE, FALSE)){
+  if (FALSE %in% ifelse(col_names == c("wavenumber", "absorbance"), TRUE, FALSE)) {
     x <- x %>%
-      rename(wavenumber = col_names[1],
-             absorbance = col_names[2])
+      rename(
+        wavenumber = col_names[1],
+        absorbance = col_names[2]
+      )
     warning("Columns renamed to `wavenumber`, `absorbance`. Please make sure these
           labels match the contents of the columns.")
   }
@@ -62,15 +62,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     format(scientific = FALSE)
 
   if (!is.null(wet_chem_path)) {
-    wet_chem <- read_csv(wet_chem_path)
 
-    sample_col_name <- names(wet_chem)[1]
-    compound_col_name <- names(wet_chem)[2]
-  # ideally, you can note if you're adding bsi or toc data or something else
-  # but for now, users can change it if it's not bsi
-    x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
-      rename(bsi = compound_col_name) %>%
-      select(sample_id, bsi, everything())
   }
   class(x) <- c("ftirs", class(x))
   if (format == "wide") {
@@ -81,6 +73,23 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   # class(x) <- c("ftirs", class(x))
   return(x)
 }
+
+#' Function that reads and attaches Wet Chemistry data to the FTIRS object
+#' This function is optionally called in `read_ftirs()` via the `wet_chem_path` argument.
+#'
+
+wet_chem <- read_csv(wet_chem_path)
+# will we need to change input for read_ftirs wet_chem path to be passing the dots?
+sample_col_name <- names(wet_chem)[1]
+compound_col_name <- names(wet_chem)[2]
+# ideally, you can note if you're adding bsi or toc data or something else
+# but for now, users can change it if it's not bsi
+x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
+  rename(bsi = compound_col_name) %>%
+  select(sample_id, bsi, everything())
+
+
+
 
 #' Function that pivots the FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
 #' @rdname ftirs
