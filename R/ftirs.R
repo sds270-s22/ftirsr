@@ -16,7 +16,7 @@ NULL
 #' @export
 
 
-read_ftirs_file <- function(single_filepath, interpolate, ...) {
+read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
   x <- read_csv(single_filepath, ...)
   x <- x %>%
     as_tibble()
@@ -38,13 +38,14 @@ read_ftirs_file <- function(single_filepath, interpolate, ...) {
           labels match the contents of the columns.")
   }
 
-  if(interpolate == TRUE){
+  if(interpolate){
   x <- interpolate_ftirs(x$wavenumber, x$absorbance)
   }
 
   # Attach sample_id to each observation
   x <- x %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
+
   return(x)
 
 }
@@ -63,10 +64,9 @@ read_ftirs_file <- function(single_filepath, interpolate, ...) {
 
 read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   files <- list.files(dir_path, full.names = TRUE)
-  x <- files %>%
-    map_dfr(read_ftirs_file, interpolate = TRUE) %>%
-    select(sample_id, everything()) %>%
-    format(scientific = FALSE)
+
+  x <- map_dfr(.x = files, .f = read_ftirs_file, interpolate = ...) %>%
+        select(sample_id, everything())
 
   if (!is.null(wet_chem_path)) {
     x <- read_wet_chem(wet_chem_path, x)

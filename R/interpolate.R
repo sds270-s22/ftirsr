@@ -22,7 +22,8 @@ interpolate_ftirs <- function(wavenumber, absorbance,
 
   # Giving the data frame useful names before passing it back
   df <- df %>%
-    rename(wavenumber = x, absorbance = y)
+    rename(wavenumber = x, absorbance = y) %>%
+    format(scientific = FALSE)
 
   return(df)
 }

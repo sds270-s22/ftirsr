@@ -10,7 +10,7 @@
 \title{FTIRS class
 A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model}
 \usage{
-read_ftirs_file(single_filepath, interpolate, ...)
+read_ftirs_file(single_filepath, interpolate = TRUE, ...)
 
 read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
@@ -23,7 +23,7 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 \arguments{
 \item{single_filepath}{The filepath to the your FTIR spectroscopy sample.}
 
-\item{interpolate}{The}
+\item{interpolate}{A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. \code{TRUE} is default.}
 
 \item{...}{Other arguments passed on to methods. Not currently used.}
 
