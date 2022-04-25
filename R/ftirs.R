@@ -62,15 +62,14 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     format(scientific = FALSE)
 
   if (!is.null(wet_chem_path)) {
-
+    x <- read_wet_chem(wet_chem_path, x)
   }
+
   class(x) <- c("ftirs", class(x))
   if (format == "wide") {
     x <- pivot_wider(x)
   }
-  # not sure if this line is necessary but don't see where else we are doing it
-  # is it in the declaration?
-  # class(x) <- c("ftirs", class(x))
+
   return(x)
 }
 
@@ -78,20 +77,22 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
 #' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
+#' @param ... Other arguments passed on to methods. Not currently used.
 #' @importFrom readr read_csv
 #' @importFrom magrittr %>%
 #' @import dplyr
 
 read_wet_chem <- function(filepath, data){
   wet_chem <- read_csv(filepath)
-  # will we need to change input for read_ftirs wet_chem path to be passing the dots?
+
   sample_col_name <- names(wet_chem)[1]
   compound_col_name <- names(wet_chem)[2]
   # ideally, you can note if you're adding bsi or toc data or something else
   # but for now, users can change it if it's not bsi
-  x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
-    rename(bsi = compound_col_name) %>%
+  data <- left_join(data, wet_chem, by = c("sample_id" = sample_col_name)) %>%
+    rename(bsi = all_of(compound_col_name)) %>%
     select(sample_id, bsi, everything())
+  return(data)
 }
 
 
