@@ -57,7 +57,7 @@ read_ftirs_file <- function(single_filepath, ...) {
 read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   files <- list.files(dir_path, full.names = TRUE)
   x <- files %>%
-    purrr::map_dfr(read_ftirs_file) %>%
+    map_dfr(read_ftirs_file) %>%
     select(sample_id, everything()) %>%
     format(scientific = FALSE)
 
@@ -75,19 +75,24 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 }
 
 #' Function that reads and attaches Wet Chemistry data to the FTIRS object
-#' This function is optionally called in `read_ftirs()` via the `wet_chem_path` argument.
-#'
+#' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
+#' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
+#' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
+#' @importFrom readr read_csv
+#' @importFrom magrittr %>%
+#' @import dplyr
 
-wet_chem <- read_csv(wet_chem_path)
-# will we need to change input for read_ftirs wet_chem path to be passing the dots?
-sample_col_name <- names(wet_chem)[1]
-compound_col_name <- names(wet_chem)[2]
-# ideally, you can note if you're adding bsi or toc data or something else
-# but for now, users can change it if it's not bsi
-x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
-  rename(bsi = compound_col_name) %>%
-  select(sample_id, bsi, everything())
-
+read_wet_chem <- function(filepath, data){
+  wet_chem <- read_csv(filepath)
+  # will we need to change input for read_ftirs wet_chem path to be passing the dots?
+  sample_col_name <- names(wet_chem)[1]
+  compound_col_name <- names(wet_chem)[2]
+  # ideally, you can note if you're adding bsi or toc data or something else
+  # but for now, users can change it if it's not bsi
+  x <- left_join(x, wet_chem, by = c("sample_id" = sample_col_name)) %>%
+    rename(bsi = compound_col_name) %>%
+    select(sample_id, bsi, everything())
+}
 
 
 
