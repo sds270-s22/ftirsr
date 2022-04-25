@@ -18,15 +18,25 @@ NULL
 read_ftirs_file <- function(single_filepath, ...) {
   x <- read_csv(single_filepath, ...)
   x <- x %>%
-    as_tibble() %>%
-    ## this next line might not be relevant if we specify not to have index col
-    ## not sure what would be more standard
-    select(-1)
+    as_tibble()
+
+  if(ncol(x)>2){
+    x <- x %>%
+      select(-1)
+    warning("Deleted presumed index column.")
+  }
+
+# put in function?
 
   col_names <- names(x)
-  x <- x %>%
-    rename(wavenumber = col_names[1],
-           absorbance = col_names[2])
+  if(FALSE %in% ifelse(col_names == c("wavenumber", "absorbance"), TRUE, FALSE)){
+    x <- x %>%
+      rename(wavenumber = col_names[1],
+             absorbance = col_names[2])
+    warning("Columns renamed to `wavenumber`, `absorbance`. Please make sure these
+          labels match the contents of the columns.")
+  }
+
 
   x <- interpolate_ftirs(x$wavenumber, x$absorbance) %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
