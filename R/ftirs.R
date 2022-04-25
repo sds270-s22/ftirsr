@@ -82,7 +82,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' @importFrom magrittr %>%
 #' @import dplyr
 
-read_wet_chem <- function(filepath, data){
+read_wet_chem <- function(filepath, data) {
   wet_chem <- read_csv(filepath)
 
   sample_col_name <- names(wet_chem)[1]
