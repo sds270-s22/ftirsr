@@ -173,23 +173,28 @@ is.ftirs <- function(obj, ...) {
 #' @rdname ftirs
 #' @param your_data must be in the wide format -> looks like it might not have to be!
 #' @param ... Other arguments passed on to methods. Not currently used.
-#' @import pls
 #' @importFrom tibble rownames_to_column
+#' @importFrom magrittr %>%
 #' @importFrom stats predict
 #' @export
 
 predict.ftirs <- function(your_data, ...) {
-  combined_artic_df_wide <- rbind(greenland, alaska) %>%
-    pivot_wider()
-
-  our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
-
-
-  preds <- as.data.frame(predict(our_mod, data = your_data)) %>%
-    rownames_to_column(var = "sample_id")
+  mod <- arctic_mod()
+  preds <- as.data.frame(predict(mod, data = your_data))
   ## these are the wrong sample_id names
   # eventually just return for component we want
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
 }
 
+#' A function that returns the PLSR model used by `predict.ftirs()` to predict BSi percentages from testing data.
+#' This model is trained on arctic lake core samples from Alaska and Greenland.
+#' @param ... Other arguments passed on to methods. Not currently used.
+#' @importFrom pls plsr
+#' @export
+
+arctic_mod <- function(...){
+  combined_arctic_df_wide <- rbind(greenland, alaska)
+  our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_arctic_df_wide,
+                  validation = "CV", segments = 10)
+}
