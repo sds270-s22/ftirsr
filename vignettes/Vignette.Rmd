@@ -1,0 +1,25 @@
+---
+title: "Vignette"
+author: "Grace Hartley, Emma Vejcik"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ftirsr)
+library(dplyr)
+library(ggplot2)
+```
+
+The 
+
