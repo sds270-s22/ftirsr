@@ -1,22 +1,12 @@
 library(hexSticker)
 library(OpenImageR)
 library(magick)
-library(ftirsr)
+library(plsr)
 
-line_chart <-image_read("./data-raw/Sticker/linechart2.png")
+line_chart <-image_read("./data-raw/Sticker/linechart4.png")
 
-sticker(subplot = line_chart,
-        filename="Sticker/sticker.png" )
-
-sticker(line_chart,
-        package="hexSticker", p_size=20, s_x=.8, s_y=.6, s_width=1.4, s_height=1.2,
-        filename="inst/figures/baseplot.png")
-
-sticker(subplot = line_chart, p_size=20, p_color = "#43828D", h_color = "#43828D", h_fill = "#6BDA63",
-        s_x = 1, s_y = .8, s_width = 3, s_height = 3,
+sticker(subplot = line_chart, p_size=20, p_color = "#4365F9", h_color = "#4365F9", h_fill = "#42EB1A",h_size = 0.9,
+        s_x = 1.35, s_y = 0.55, s_width = 1000, s_height = 2, spotlight = FALSE,
         white_around_sticker = TRUE,
-        package = "ftirsr")%>%
+        package = "ftiRRRs")%>%
   print()
-
-
-line_chart %>% print()
