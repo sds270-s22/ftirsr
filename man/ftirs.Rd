@@ -18,7 +18,7 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
 \method{pivot_longer}{ftirs}(ftirs_data_wide, wet_chem, ...)
 
-\method{predict}{ftirs}(your_data, ...)
+\method{predict}{ftirs}(object, ...)
 }
 \arguments{
 \item{single_filepath}{The filepath to the your FTIR spectroscopy sample.}
@@ -39,7 +39,7 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
 \item{wet_chem}{A logical value (\code{TRUE} or \code{FALSE}) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.}
 
-\item{your_data}{must be in the wide format -> looks like it might not have to be!}
+\item{object}{must be in the wide format -> looks like it might not have to be!}
 }
 \description{
 FTIRS class

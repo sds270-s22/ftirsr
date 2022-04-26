@@ -170,21 +170,21 @@ is.ftirs <- function(obj, ...) {
 
 #' A function that predicts bsi content based on our model with your data
 #' @rdname ftirs
-#' @param your_data must be in the wide format -> looks like it might not have to be!
+#' @param object must be in the wide format -> looks like it might not have to be!
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @import pls
 #' @importFrom tibble rownames_to_column
 #' @importFrom stats predict
 #' @export
 
-predict.ftirs <- function(your_data, ...) {
+predict.ftirs <- function(object, ...) {
   combined_artic_df_wide <- rbind(greenland, alaska) %>%
     pivot_wider()
 
   our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
 
 
-  preds <- as.data.frame(predict(our_mod, data = your_data)) %>%
+  preds <- as.data.frame(predict(our_mod, data = object)) %>%
     rownames_to_column(var = "sample_id")
   ## these are the wrong sample_id names
   # eventually just return for component we want
