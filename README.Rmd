@@ -13,7 +13,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ftirsr
+# ftirsr <img src="./data-raw/Sticker/ftiRRRs.png" align="right" height=140/>
+
 
 The goal of `ftirsr` is to help easily create a Partial Least Squares Regression model to estimate composition of natural compounds such as biogenic silica and total organic carbon in lake sediment core samples. 
 
