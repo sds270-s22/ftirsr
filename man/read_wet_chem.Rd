@@ -5,7 +5,7 @@
 \title{Function that reads and attaches Wet Chemistry data to the FTIRS object
 This function is called in \code{read_ftirs()} via the optional \code{wet_chem_path} argument.}
 \usage{
-read_wet_chem(filepath, data)
+read_wet_chem(filepath, data, ...)
 }
 \arguments{
 \item{filepath}{An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.}
