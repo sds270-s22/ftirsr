@@ -7,9 +7,10 @@ test_that("Checking greenland rows, cols", {
 })
 
 test_that("Checking classes", {
-  expect_is(greenland$bsi, "numeric")
-  expect_is(greenland$sample_id, "character")
-  expect_is(greenland$absorbance, "numeric")
+  expect_type(greenland$bsi, "double")
+  expect_type(greenland$sample_id, "character")
+  expect_type(greenland$absorbance, "double")
+  expect_s3_class(greenland, "ftirs")
 })
 
 #alaska.csv unit tests
@@ -19,8 +20,13 @@ test_that("Checking alaska rows, cols", {
 })
 
 test_that("Checking classes", {
-  expect_is(alaska$bsi, "numeric")
-  expect_is(alaska$sample_id, "character")
-  expect_is(alaska$absorbance, "numeric")
+  expect_type(alaska$bsi, "double")
+  expect_type(alaska$sample_id, "character")
+  expect_type(alaska$absorbance, "double")
+  expect_s3_class(alaska, "ftirs")
 })
 
+# read_ftirs_file.R unit tests
+test_that("Checking read_ftirs", {
+
+})
