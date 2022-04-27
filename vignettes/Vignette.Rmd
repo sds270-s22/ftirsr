@@ -1,7 +1,7 @@
 ---
 title: "Vignette"
 author: "Grace Hartley, Emma Vejcik"
-output: rmarkdown::html_vignette
+output: knitr::rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette}
   %\VignetteEngine{knitr::rmarkdown}
