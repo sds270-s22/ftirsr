@@ -168,6 +168,21 @@ is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
 
+#' Function that coerces data frame into object class `ftirs`
+#' This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
+#' @param df A data.frame to coerce to class `ftirs`.
+#' @export
+as_ftirs <- function(df) {
+  if("data.frame" %in% class(df)){
+    class(df) <- c("ftirs", class(df))
+  } else{
+    stop("Only objects with class 'data.frame' may be coerced to class 'ftirs'.")
+  }
+  return(df)
+}
+
+
+
 #' A function that predicts bsi content based on our model with your data
 #' @rdname ftirs
 #' @param object must be in the wide format -> looks like it might not have to be!
@@ -186,3 +201,5 @@ predict.ftirs <- function(object, ...) {
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
 }
+
+
