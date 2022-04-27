@@ -39,6 +39,7 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
   }
 
   if(interpolate){
+
   x <- interpolate_ftirs(x$wavenumber, x$absorbance)
   }
 
