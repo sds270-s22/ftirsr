@@ -42,6 +42,9 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
     if(nrow(x)>3762){
       warning("Samples provided have significantly larger wavenumber spectrum than wavenumbers interpolated on to. Consider not interpolating (interpolate = FALSE) samples to preserve entire spectrum.")
     }
+    if(nrow(x)<1881){
+      warning("Returned NA absorbance values.")
+    }
   x <- interpolate_ftirs(x$wavenumber, x$absorbance)
   }
 
@@ -188,7 +191,7 @@ as_ftirs <- function(df) {
 
 #' A function that predicts bsi content based on our model with your data
 #' @rdname ftirs
-#' @param object must be in the wide format -> looks like it might not have to be!
+#' @param object A wide, non-tidy `ftirs` dataframe.
 #' @param ... Other arguments passed on to generic predict method.
 #' @import pls
 #' @importFrom tibble rownames_to_column
@@ -196,6 +199,9 @@ as_ftirs <- function(df) {
 #' @export
 
 predict.ftirs <- function(object, ...) {
+  if(ncol(object)<4){
+    stop("Data must be in wide ftirs format to predict. Use pivot_wider().")
+  }
   combined_artic_df_wide <- rbind(greenland, alaska) %>%
     pivot_wider()
 

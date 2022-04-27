@@ -39,7 +39,7 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
 \item{wet_chem}{A logical value (\code{TRUE} or \code{FALSE}) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.}
 
-\item{object}{must be in the wide format -> looks like it might not have to be!}
+\item{object}{A wide, non-tidy \code{ftirs} dataframe.}
 }
 \description{
 FTIRS class
