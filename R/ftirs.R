@@ -5,9 +5,9 @@ NULL
 
 #' A function that generates a tibble from a single FTIRS sample
 #' @rdname ftirs
-#' @param single_filepath The filepath to the your FTIR spectroscopy sample.
+#' @param single_filepath The filepath to an individual FTIR spectroscopy sample.
 #' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
-#' @param ... Other arguments passed on to methods. Not currently used.
+#' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @import readr
@@ -40,12 +40,14 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
 
   if(interpolate){
   x <- interpolate_ftirs(x$wavenumber, x$absorbance)
+
   }
 
   # Attach sample_id to each observation
   x <- x %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 
+   x <- as_ftirs(x)
   return(x)
 
 }
@@ -55,7 +57,7 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
 #' @param dir_path Filepath to the folder that contains the csv files with FTIRS samples. Each file should be formatted such that there are three columns; index, `wavenumber` (numeric), and `absorbance` (numeric).
 #' @param wet_chem_path An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param format The desired format of the FTIRS dataframe; `long` (default) or `wide`.
-#' @param ... Other arguments passed on to methods. Not currently used.
+#' @param ... Other arguments passed on to `map_dfr()`
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @importFrom purrr map_dfr
@@ -72,7 +74,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     x <- read_wet_chem(wet_chem_path, x)
   }
 
-  class(x) <- c("ftirs", class(x))
+  #x <- as_ftirs(x)
   if (format == "wide") {
     x <- pivot_wider(x)
   }
@@ -84,13 +86,13 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
 #' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
-#' @param ... Other arguments passed on to methods. Not currently used.
+#' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom readr read_csv
 #' @importFrom magrittr %>%
 #' @import dplyr
 
 read_wet_chem <- function(filepath, data, ...) {
-  wet_chem <- read_csv(filepath)
+  wet_chem <- read_csv(filepath, ...)
 
   sample_col_name <- names(wet_chem)[1]
   compound_col_name <- names(wet_chem)[2]
@@ -110,7 +112,7 @@ read_wet_chem <- function(filepath, data, ...) {
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
-#' @importFrom tibble column_to_rownames
+#' @import tibble
 #' @export
 
 pivot_wider.ftirs <- function(ftirs_data_long, ...) {
@@ -121,7 +123,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
     ) %>%
     column_to_rownames(var = "sample_id")
 
-  class(ftirs_data_wide) <- c("ftirs", class(ftirs_data_wide))
+  ftirs_data_wide <- as_ftirs(ftirs_data_wide)
   return(ftirs_data_wide)
 }
 
@@ -156,7 +158,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
         values_to = "absorbance"
       )
   }
-  class(ftirs_data_long) <- c("ftirs", class(ftirs_data_long))
+  ftirs_data_long <- as_ftirs(ftirs_data_long)
   return(ftirs_data_long)
 }
 
@@ -168,26 +170,41 @@ is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
 
+#' Function that coerces data frame into object class `ftirs`
+#' This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
+#' @param df A data.frame to coerce to class `ftirs`.
+#' @export
+as_ftirs <- function(df) {
+  if("data.frame" %in% class(df)){
+    class(df) <- c("ftirs", class(df))
+  } else{
+    stop("Only objects with class 'data.frame' may be coerced to class 'ftirs'.")
+  }
+  return(df)
+}
+
+
+
 #' A function that predicts bsi content based on our model with your data
 #' @rdname ftirs
-#' @param object must be in the wide format -> looks like it might not have to be!
-#' @param ... Other arguments passed on to methods. Not currently used.
+#' @param object A wide, non-tidy `ftirs` dataframe.
+#' @param ... Other arguments passed on to generic predict method.
 #' @import pls
 #' @importFrom tibble rownames_to_column
 #' @importFrom stats predict
 #' @export
 
 predict.ftirs <- function(object, ...) {
+  if(ncol(object)<4){
+    stop("Data must be in wide ftirs format to predict. Use pivot_wider().")
+  }
   combined_artic_df_wide <- rbind(greenland, alaska) %>%
     pivot_wider()
 
   our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
-
-
-  preds <- as.data.frame(predict(our_mod, data = object)) %>%
-    rownames_to_column(var = "sample_id")
-  ## these are the wrong sample_id names
-  # eventually just return for component we want
+  preds <- as.data.frame(predict(object = our_mod, newdata = object, ...))
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
 }
+
+

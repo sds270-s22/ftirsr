@@ -21,11 +21,11 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 \method{predict}{ftirs}(object, ...)
 }
 \arguments{
-\item{single_filepath}{The filepath to the your FTIR spectroscopy sample.}
+\item{single_filepath}{The filepath to an individual FTIR spectroscopy sample.}
 
 \item{interpolate}{A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. \code{TRUE} is default.}
 
-\item{...}{Other arguments passed on to methods. Not currently used.}
+\item{...}{Other arguments passed on to generic predict method.}
 
 \item{dir_path}{Filepath to the folder that contains the csv files with FTIRS samples. Each file should be formatted such that there are three columns; index, \code{wavenumber} (numeric), and \code{absorbance} (numeric).}
 
@@ -39,7 +39,7 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
 \item{wet_chem}{A logical value (\code{TRUE} or \code{FALSE}) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.}
 
-\item{object}{must be in the wide format -> looks like it might not have to be!}
+\item{object}{A wide, non-tidy \code{ftirs} dataframe.}
 }
 \description{
 FTIRS class
