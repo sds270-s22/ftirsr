@@ -27,6 +27,26 @@ test_that("Checking classes", {
 })
 
 # read_ftirs_file.R unit tests
-test_that("Checking read_ftirs", {
+test_that("Checking read_ftirs_file", {
+  expect_warning(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-10.0.csv"))
+  expect_error(read_ftirs_file("~/ftirsr/tests/testthat/test_samples"))
+  expect_warning(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv"))
+  expect_type(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv")$wavenumber, "double")
+  expect_type(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv")$absorbance, "double")
+  expect_equal(ncol(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv")), 3)
+  expect_equal(names(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv"))[1], "wavenumber")
+  expect_equal(names(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv"))[2], "absorbance")
+  expect_equal(names(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv"))[3], "sample_id")
+  expect_equal(nrow(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv")), 1881)
+  expect_error(read_ftirs_file(10))
+  expect_error(read_ftirs_file("a"))
+  expect_error(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-10.0.csv", "~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv"))
+  expect_s3_class(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-10.0.csv"), "ftirs")
+  expect_equal(names(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-10.0.csv", interpolate = FALSE)), names(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-10.0.csv")))
+  expect_equal(read_ftirs_file("~/ftirsr/tests/testthat/test_samples/FISK-270.0.csv")$sample_id[1], "FISK-270.0")
+})
 
+# read_ftirs.R unit tests
+test_that("Checking read_ftirs", {
+  expect_equal(as_ftirs(as_tibble(read_ftirs("~/ftirsr/tests/testthat/test_samples"))), head(greenland %>% select(-2), 5643))
 })

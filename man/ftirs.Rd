@@ -21,7 +21,7 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 \method{predict}{ftirs}(object, ...)
 }
 \arguments{
-\item{single_filepath}{The filepath to the your FTIR spectroscopy sample.}
+\item{single_filepath}{The filepath to an individual FTIR spectroscopy sample.}
 
 \item{interpolate}{A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. \code{TRUE} is default.}
 

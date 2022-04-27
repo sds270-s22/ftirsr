@@ -5,9 +5,9 @@ NULL
 
 #' A function that generates a tibble from a single FTIRS sample
 #' @rdname ftirs
-#' @param single_filepath The filepath to the your FTIR spectroscopy sample.
+#' @param single_filepath The filepath to an individual FTIR spectroscopy sample.
 #' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
-#' @param ... Other arguments passed on to methods. Not currently used.
+#' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @import readr
@@ -39,14 +39,15 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
   }
 
   if(interpolate){
-
   x <- interpolate_ftirs(x$wavenumber, x$absorbance)
+
   }
 
   # Attach sample_id to each observation
   x <- x %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 
+   x <- as_ftirs(x)
   return(x)
 
 }
@@ -73,7 +74,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     x <- read_wet_chem(wet_chem_path, x)
   }
 
-  class(x) <- c("ftirs", class(x))
+  #x <- as_ftirs(x)
   if (format == "wide") {
     x <- pivot_wider(x)
   }
@@ -122,7 +123,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
     ) %>%
     column_to_rownames(var = "sample_id")
 
-  class(ftirs_data_wide) <- c("ftirs", class(ftirs_data_wide))
+  ftirs_data_wide <- as_ftirs(ftirs_data_wide)
   return(ftirs_data_wide)
 }
 
@@ -157,7 +158,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
         values_to = "absorbance"
       )
   }
-  class(ftirs_data_long) <- c("ftirs", class(ftirs_data_long))
+  ftirs_data_long <- as_ftirs(ftirs_data_long)
   return(ftirs_data_long)
 }
 
