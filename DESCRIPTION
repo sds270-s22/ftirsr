@@ -23,7 +23,10 @@ Imports:
     fs,
     tidyr,
     tibble,
-    pls
+    pls, 
+    knitr, 
+    ggplot2
 Depends: 
     R (>= 2.10)
 LazyData: true
+VignetteBuilder: knitr
