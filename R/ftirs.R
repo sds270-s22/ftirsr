@@ -39,6 +39,9 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
   }
 
   if(interpolate){
+    if(nrow(x)>3762){
+      warning("Samples provided have significantly larger wavenumber spectrum than wavenumbers interpolated on to. Consider not interpolating (interpolate = FALSE) samples to preserve entire spectrum.")
+    }
   x <- interpolate_ftirs(x$wavenumber, x$absorbance)
   }
 
