@@ -57,7 +57,7 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
 #' @param dir_path Filepath to the folder that contains the csv files with FTIRS samples. Each file should be formatted such that there are three columns; index, `wavenumber` (numeric), and `absorbance` (numeric).
 #' @param wet_chem_path An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param format The desired format of the FTIRS dataframe; `long` (default) or `wide`.
-#' @param ... Other arguments passed on to methods. Not currently used.
+#' @param ... Other arguments passed on to `map_dfr()`
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @importFrom purrr map_dfr
@@ -86,13 +86,13 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
 #' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
-#' @param ... Other arguments passed on to methods. Not currently used.
+#' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom readr read_csv
 #' @importFrom magrittr %>%
 #' @import dplyr
 
 read_wet_chem <- function(filepath, data, ...) {
-  wet_chem <- read_csv(filepath)
+  wet_chem <- read_csv(filepath, ...)
 
   sample_col_name <- names(wet_chem)[1]
   compound_col_name <- names(wet_chem)[2]
@@ -112,7 +112,7 @@ read_wet_chem <- function(filepath, data, ...) {
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
-#' @importFrom tibble column_to_rownames
+#' @import tibble
 #' @export
 
 pivot_wider.ftirs <- function(ftirs_data_long, ...) {

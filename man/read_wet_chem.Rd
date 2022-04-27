@@ -12,7 +12,7 @@ read_wet_chem(filepath, data, ...)
 
 \item{data}{The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.}
 
-\item{...}{Other arguments passed on to methods. Not currently used.}
+\item{...}{Other arguments passed on to \code{read_csv()}.}
 }
 \description{
 Function that reads and attaches Wet Chemistry data to the FTIRS object
