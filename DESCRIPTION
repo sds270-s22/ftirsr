@@ -9,7 +9,9 @@ Maintainer: Emma Vejcik <evejcik@gmail.com>
 Description: The `ftirsr` package works to faciliate Partial Least Squares (PLS) Regression with Fourier Transform Infrared (FTIR) spectroscopy data. This pacakge is designed to make it easy for geologists to create and optimize a PLS model to analyze the absorbance spectra of their data.
 License: MIT + file LICENSE
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rmarkdown,
+    knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

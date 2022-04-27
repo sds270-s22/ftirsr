@@ -23,9 +23,9 @@ library(ggplot2)
 
 The `ftisr` package provides easy access and user-friendly methods for researchers analyzing Biogenic Silica (BSi). (BSi) is used as a proxy for past temperatures in High Arctic settings. Typically, greater amounts of BSi in sediment cores indicate warmer temperatures. Recently paleoclimatologists have begun to use Fourier Transform Infrared (FTIR) spectroscopy to collect information on BSi. However, the offloaded relative absorbency data makes comparison with other proxies difficult. This [project](https://github.com/sds270-s22/ftirsr) is intended to develop an R package to facilitate analysis of multivariate-length samples using a model and observations in collaboration with [the Smith College PLSR SDS Capstone group](https://github.com/sds-capstone/PLSmodel). 
 
-## Inspiration
+## Motivation
 
-We draw inspiration from [a previous project](https://www.causeweb.org/usproc/eusrc/2021/virtual-posters/7). Although packages that contain methods for PLSR already exist in the R universe, none provide the context and specific methods necessary for the implementation of such methods on a calibrated model specifically based on predicting BSi percentages. 
+We draw motivation from [a previous project](https://www.causeweb.org/usproc/eusrc/2021/virtual-posters/7). Although packages that contain methods for PLSR already exist in the R universe, none provide the context and specific methods necessary for the implementation of such methods on a calibrated model specifically based on predicting BSi percentages. 
 
 
 ## Installation
@@ -55,3 +55,6 @@ Included in this package are two datasets. Both were sourced from the referenced
 
 -`alaska.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
 -`greenland.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
+
+Although these datasets are presented in tidy-format, we leave the option available for 
+
