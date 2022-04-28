@@ -2,12 +2,10 @@
 % Please edit documentation in R/ftirs.R
 \name{arctic_mod}
 \alias{arctic_mod}
-\title{Returns the PLSR model used by \code{predict.ftirs()}.
-This model is trained on arctic lake core samples from Alaska and Greenland.}
+\title{Returns the PLSR model used by \code{predict.ftirs()}}
 \usage{
 arctic_mod()
 }
 \description{
-Returns the PLSR model used by \code{predict.ftirs()}.
 This model is trained on arctic lake core samples from Alaska and Greenland.
 }

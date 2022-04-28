@@ -205,11 +205,13 @@ predict.ftirs <- function(object, ...) {
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
 }
 
-#' Returns the PLSR model used by `predict.ftirs()`.
-#' This model is trained on arctic lake core samples from Alaska and Greenland.
-#@rdname ftirs
+#' Returns the PLSR model used by `predict.ftirs()`
+#' @description This model is trained on arctic lake core samples from Alaska and Greenland.
 #' @importFrom pls plsr
+#@rdname ftirs
 #' @export
+
+
 
 arctic_mod <- function(){
   combined_arctic_df_wide <- rbind(greenland, alaska) %>%
