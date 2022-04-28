@@ -2,7 +2,11 @@
 % Please edit documentation in R/ftirs.R
 \name{read_wet_chem}
 \alias{read_wet_chem}
+<<<<<<< HEAD
 \title{Method that reads and attaches Wet Chemistry data to the FTIRS object
+=======
+\title{Read and attach Wet Chemistry data to an FTIRS object
+>>>>>>> db26ef2ca6653b0870fbc8453a16377bb30315ad
 This function is called in \code{read_ftirs()} via the optional \code{wet_chem_path} argument.}
 \usage{
 read_wet_chem(filepath, data, ...)
@@ -15,6 +19,10 @@ read_wet_chem(filepath, data, ...)
 \item{...}{Other arguments passed on to \code{read_csv()}.}
 }
 \description{
+<<<<<<< HEAD
 Method that reads and attaches Wet Chemistry data to the FTIRS object
+=======
+Read and attach Wet Chemistry data to an FTIRS object
+>>>>>>> db26ef2ca6653b0870fbc8453a16377bb30315ad
 This function is called in \code{read_ftirs()} via the optional \code{wet_chem_path} argument.
 }

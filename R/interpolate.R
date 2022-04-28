@@ -13,11 +13,10 @@
 
 interpolate_ftirs <- function(wavenumber, absorbance,
                               out_vec = rounded_wavenumbers$wavenumber, ...) {
-
-  if(length(wavenumber)>3762){
+  if (length(wavenumber) > 3762) {
     warning("Samples provided have significantly larger wavenumber spectrum than wavenumbers interpolated on to. Consider not interpolating (interpolate = FALSE in read_ftirs()) samples to preserve entire spectrum.")
   }
-  if(length(wavenumber)<1881){
+  if (length(wavenumber) < 1881) {
     warning("Returned NA absorbance values.")
   }
 
@@ -29,8 +28,8 @@ interpolate_ftirs <- function(wavenumber, absorbance,
 
   # Giving the data frame useful names before passing it back
   df <- df %>%
-     rename(wavenumber = x, absorbance = y) #%>%
-    # format(scientific = FALSE)
+    rename(wavenumber = x, absorbance = y) # %>%
+  # format(scientific = FALSE)
 
   return(df)
 }
