@@ -117,17 +117,40 @@ Anyone who is interested in exploring geology via spectroscopy and BSi. The meth
 **How can we upredict the amount of Biogenic Silica within organic samples given a series of data obtained from FTIR spectroscopy?**
 
 #### Step 1: Load the data
-```{r}
 
+```{r}
+#my_data <- read_ftirs("tests/testthat/test_samples")
 ```
 
-#### Step 2: Interpolate the data
+#### This step also includes interpolating the data.
+
+#### Step 2: Fit the model to the data
+
+```{r}
+#my_data_wide <- my_data %>% pivot_wider()
+
+#preds <- predict(my_data_wide)
+```
+
+```{r}
+#library(data.table)
+#preds_full <- setDT(preds, keep.rownames = TRUE)
+```
 
 
-#### Step 3: Fit the model to the data
+#### Step 3: Obtain results
+
+```{r}
+#preds_full
+```
 
 
-#### Step 4: Obtain results
+```{r}
+#ggplot(preds[1,], aes(x = FISK.10, y = bsi))
+```
+
+
+
 
 
 
