@@ -45,7 +45,7 @@ library(ftirsr)
 
 ### Necessary Packages:
 
-In order to install the `ftirs` package, you will need the following R packages:
+In order to install the `ftirsr` package, you will need the following R packages:
 
 - `dplyr`
 - `magrittr`

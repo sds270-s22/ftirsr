@@ -3,7 +3,7 @@
 S3method(pivot_longer,ftirs)
 S3method(pivot_wider,ftirs)
 S3method(predict,ftirs)
-export(as_ftirs)
+export(as.ftirs)
 export(interpolate_ftirs)
 export(is_ftirs)
 export(read_ftirs)

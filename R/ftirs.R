@@ -46,7 +46,7 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, accept = ".csv"
   x <- x %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 
-  x <- as_ftirs(x)
+   x <- as.ftirs(x)
   return(x)
 }
 
@@ -72,7 +72,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
     x <- read_wet_chem(wet_chem_path, x)
   }
 
-  # x <- as_ftirs(x)
+  #x <- as.ftirs(x)
   if (format == "wide") {
     x <- pivot_wider(x)
   }
@@ -119,7 +119,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
     ) %>%
     column_to_rownames(var = "sample_id")
 
-  ftirs_data_wide <- as_ftirs(ftirs_data_wide)
+  ftirs_data_wide <- as.ftirs(ftirs_data_wide)
   return(ftirs_data_wide)
 }
 
@@ -154,7 +154,8 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
         values_to = "absorbance"
       )
   }
-  ftirs_data_long <- as_ftirs(ftirs_data_long) %>%
+
+  ftirs_data_long <- as.ftirs(ftirs_data_long) %>%
     mutate(wavenumber = as.numeric(wavenumber))
   return(ftirs_data_long)
 }
