@@ -7,6 +7,7 @@ NULL
 #' @rdname ftirs
 #' @param single_filepath The filepath to an individual FTIR spectroscopy sample.
 #' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
+#'
 #' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom magrittr %>%
 #' @import dplyr
@@ -164,7 +165,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @export
-is_ftirs <- function(obj, ...) {
+is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
 
@@ -172,7 +173,7 @@ is_ftirs <- function(obj, ...) {
 #' This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
 #' @param df A data.frame to coerce to class `ftirs`.
 #' @export
-as_ftirs <- function(df) {
+as.ftirs <- function(df) {
   if ("data.frame" %in% class(df)) {
     class(df) <- c("ftirs", class(df))
   } else {
