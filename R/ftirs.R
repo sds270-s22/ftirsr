@@ -211,8 +211,6 @@ predict.ftirs <- function(object, ...) {
 #@rdname ftirs
 #' @export
 
-
-
 arctic_mod <- function(){
   combined_arctic_df_wide <- rbind(greenland, alaska) %>%
     pivot_wider()
