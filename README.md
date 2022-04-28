@@ -1,9 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
 [![R-CMD-check](https://github.com/sds270-s22/ftirsr/workflows/R-CMD-check/badge.svg)](https://github.com/sds270-s22/ftirsr/actions)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ftirsr)](https://CRAN.R-project.org/package=ftirsr)
+<!-- badges: end -->
 
 # ftirsr <img src="./data-raw/Sticker/ftiRRRs.png" align="right" height=140/>
 
@@ -17,7 +21,7 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/ftirsr")
-#> Skipping install of 'ftirsr' from a github remote, the SHA1 (f74c1df9) has not changed since last install.
+#> Skipping install of 'ftirsr' from a github remote, the SHA1 (6c947fb4) has not changed since last install.
 #>   Use `force = TRUE` to force installation
 ```
 
@@ -1532,24 +1536,24 @@ is.ftirs(my_data_wide)
 # It is easy to predict the amount of Biogenic Silica in your sample using our model that is trained on 131 arctic lake sediment core samples
 preds <- predict(my_data_wide)
 preds
-#>            bsi.1 comps bsi.2 comps bsi.3 comps bsi.4 comps bsi.5 comps
-#> FISK-10.0     16.30280    21.28228    19.35775    17.77782    16.72570
-#> FISK-110.0    11.68072    17.06655    15.25301    13.85117    10.46511
-#> FISK-270.0    14.58335    18.84250    16.80977    15.77409    14.98739
-#>            bsi.6 comps bsi.7 comps bsi.8 comps bsi.9 comps bsi.10 comps
-#> FISK-10.0     15.19624    14.93517    14.24146    14.96709     15.79963
-#> FISK-110.0    10.43918    12.88861    12.31531    13.33525     14.32237
-#> FISK-270.0    14.02127    13.71863    13.30506    14.06645     15.13158
+#>    sample_id bsi.1 comps bsi.2 comps bsi.3 comps bsi.4 comps bsi.5 comps
+#> 1  FISK-10.0    16.30280    21.28228    19.35775    17.77782    16.72570
+#> 2 FISK-110.0    11.68072    17.06655    15.25301    13.85117    10.46511
+#> 3 FISK-270.0    14.58335    18.84250    16.80977    15.77409    14.98739
+#>   bsi.6 comps bsi.7 comps bsi.8 comps bsi.9 comps bsi.10 comps
+#> 1    15.19624    14.93517    14.24146    14.96709     15.79963
+#> 2    10.43918    12.88861    12.31531    13.33525     14.32237
+#> 3    14.02127    13.71863    13.30506    14.06645     15.13158
 ```
 
 ``` r
 # We can specify the number of components we want to see, as this is inherited from the predict.mvr method
 preds <- predict(my_data_wide, ncomp = 4)
 preds
-#>            bsi.4 comps
-#> FISK-10.0     17.77782
-#> FISK-110.0    13.85117
-#> FISK-270.0    15.77409
+#>    sample_id bsi.4 comps
+#> 1  FISK-10.0    17.77782
+#> 2 FISK-110.0    13.85117
+#> 3 FISK-270.0    15.77409
 ```
 
 ``` r
@@ -1564,11 +1568,11 @@ summary(mod)
 #> VALIDATION: RMSEP
 #> Cross-validated using 10 random segments.
 #>        (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
-#> CV           6.848    4.556    4.327    4.157    4.035    3.926    3.945
-#> adjCV        6.848    4.553    4.317    4.150    4.016    3.907    3.913
+#> CV           6.848    4.553    4.347    4.171    4.030    3.882    3.851
+#> adjCV        6.848    4.550    4.340    4.170    4.008    3.860    3.819
 #>        7 comps  8 comps  9 comps  10 comps
-#> CV       4.060    4.232    4.083     4.130
-#> adjCV    3.986    4.149    3.998     4.042
+#> CV       3.857    3.847    3.931     3.936
+#> adjCV    3.800    3.791    3.859     3.858
 #> 
 #> TRAINING: % variance explained
 #>      1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps  8 comps
