@@ -49,9 +49,9 @@ A function that generates a tibble from a single FTIRS sample
 
 A function that generates a tidy data frame binding multiple FTIRS samples together
 
-Function that pivots the FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
+Method that pivots the FTIRS dataframe to wide, non-tidy format, necessary for input into a PLSR model.
 
-Function that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
+Method that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
 
-A function that predicts bsi content based on our model with your data
+A Method that predicts BSi content based on our model with your data
 }

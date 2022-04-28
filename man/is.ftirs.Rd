@@ -2,7 +2,7 @@
 % Please edit documentation in R/ftirs.R
 \name{is.ftirs}
 \alias{is.ftirs}
-\title{Function that checks if an object has the FTIRS class format}
+\title{Method that checks if an object has the FTIRS class format}
 \usage{
 is.ftirs(obj, ...)
 }
@@ -12,5 +12,5 @@ is.ftirs(obj, ...)
 \item{...}{Other arguments passed on to methods. Not currently used.}
 }
 \description{
-Function that checks if an object has the FTIRS class format
+Method that checks if an object has the FTIRS class format
 }
