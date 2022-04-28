@@ -2,7 +2,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![R-CMD-check](https://github.com/sds270-s22/ftirsr/workflows/R-CMD-check/badge.svg)](https://github.com/sds270-s22/ftirsr/actions)
-
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
@@ -18,8 +17,16 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/ftirsr")
-#> Skipping install of 'ftirsr' from a github remote, the SHA1 (9ca4af67) has not changed since last install.
-#>   Use `force = TRUE` to force installation
+#> Downloading GitHub repo sds270-s22/ftirsr@HEAD
+#> 
+#>      checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpIMzTOf/remotes53c936c2f0ba/sds270-s22-ftirsr-6af5cb7/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpIMzTOf/remotes53c936c2f0ba/sds270-s22-ftirsr-6af5cb7/DESCRIPTION’
+#>   ─  preparing ‘ftirsr’:
+#>      checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘ftirsr_0.0.0.9001.tar.gz’
+#>      
+#> 
 ```
 
 ## Example
