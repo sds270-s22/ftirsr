@@ -91,12 +91,12 @@ test_that("Checking pivot_longer.ftirs", {
   expect_type(pivot_longer(pivot_wider(greenland), wet_chem = TRUE)$bsi, "double")
 })
 
-test_that("Checking is_ftirs", {
+test_that("Checking is.ftirs", {
   expect_false(is.ftirs(3))
   expect_true(is.ftirs(greenland))
 })
 
-test_that("Checking as_ftirs", {
+test_that("Checking as.ftirs", {
   expect_error(as.ftirs(3))
   expect_error(as.ftirs("a"))
   expect_error(as.ftirs(greenland$wavenumber))
