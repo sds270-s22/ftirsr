@@ -2,7 +2,7 @@
 % Please edit documentation in R/ftirs.R
 \name{as_ftirs}
 \alias{as_ftirs}
-\title{Function that coerces data frame into object class \code{ftirs}
+\title{Coerce data frame into object class \code{ftirs}
 This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.}
 \usage{
 as_ftirs(df)
@@ -11,6 +11,6 @@ as_ftirs(df)
 \item{df}{A data.frame to coerce to class \code{ftirs}.}
 }
 \description{
-Function that coerces data frame into object class \code{ftirs}
+Coerce data frame into object class \code{ftirs}
 This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
 }

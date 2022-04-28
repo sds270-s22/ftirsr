@@ -1,9 +1,9 @@
 #' FTIRS class
-#' A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model
+#' A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model and has access to the relevant class methods.
 #' @name ftirs
 NULL
 
-#' A function that generates a tibble from a single FTIRS sample
+#' Generates a tibble from a single FTIRS sample
 #' @rdname ftirs
 #' @param single_filepath The filepath to an individual FTIR spectroscopy sample.
 #' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
@@ -12,11 +12,12 @@ NULL
 #' @import dplyr
 #' @import readr
 #' @importFrom fs path_file
+#' @importFrom tibble as_tibble
 #' @importFrom purrr map_dfr
 #' @export
 
 
-read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
+read_ftirs_file <- function(single_filepath, interpolate = TRUE, accept = ".csv", ...) {
   x <- read_csv(single_filepath, ...)
   x <- x %>%
     as_tibble()
@@ -38,21 +39,19 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
           labels match the contents of the columns.")
   }
 
-  if(interpolate){
-  x <- interpolate_ftirs(x$wavenumber, x$absorbance)
-
+  if (interpolate) {
+    x <- interpolate_ftirs(x$wavenumber, x$absorbance)
   }
 
   # Attach sample_id to each observation
   x <- x %>%
     mutate(sample_id = tools::file_path_sans_ext(fs::path_file(single_filepath)))
 
-   x <- as_ftirs(x)
+  x <- as_ftirs(x)
   return(x)
-
 }
 
-#' A function that generates a tidy data frame binding multiple FTIRS samples together
+#' Generate a tidy data frame binding multiple FTIRS samples together
 #' @rdname ftirs
 #' @param dir_path Filepath to the folder that contains the csv files with FTIRS samples. Each file should be formatted such that there are three columns; index, `wavenumber` (numeric), and `absorbance` (numeric).
 #' @param wet_chem_path An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
@@ -68,13 +67,13 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   files <- list.files(dir_path, full.names = TRUE)
 
   x <- map_dfr(.x = files, .f = read_ftirs_file, interpolate = ...) %>%
-        select(sample_id, everything())
+    select(sample_id, everything())
 
   if (!is.null(wet_chem_path)) {
     x <- read_wet_chem(wet_chem_path, x)
   }
 
-  #x <- as_ftirs(x)
+  # x <- as_ftirs(x)
   if (format == "wide") {
     x <- pivot_wider(x)
   }
@@ -82,7 +81,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   return(x)
 }
 
-#' Function that reads and attaches Wet Chemistry data to the FTIRS object
+#' Reads and attach Wet Chemistry data to an FTIRS object
 #' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
 #' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
@@ -106,7 +105,7 @@ read_wet_chem <- function(filepath, data, ...) {
 
 
 
-#' Function that pivots the FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
+#' Pivot a FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
 #' @rdname ftirs
 #' @param ftirs_data_long A long, tidy format FTIRS dataframe.
 #' @param ... Other arguments passed on to methods. Not currently used.
@@ -127,7 +126,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
   return(ftirs_data_wide)
 }
 
-#' Function that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
+#' Pivot a wide, non-tidy FTIRS dataframe to a long, tidy format.
 #' @rdname ftirs
 #' @param ftirs_data_wide A wide, non-tidy FTIRS dataframe. Columns = wavenumber, rows = sample_id, and values = absorbance.
 #' @param wet_chem A logical value (`TRUE` or `FALSE`) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.
@@ -158,26 +157,27 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
         values_to = "absorbance"
       )
   }
-  ftirs_data_long <- as_ftirs(ftirs_data_long)
+  ftirs_data_long <- as_ftirs(ftirs_data_long) %>%
+    mutate(wavenumber = as.numeric(wavenumber))
   return(ftirs_data_long)
 }
 
-#' Function that checks if an object has the FTIRS class format
+#' Check if an object has the FTIRS class format
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @export
-is.ftirs <- function(obj, ...) {
+is_ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
 
-#' Function that coerces data frame into object class `ftirs`
+#' Coerce data frame into object class `ftirs`
 #' This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
 #' @param df A data.frame to coerce to class `ftirs`.
 #' @export
 as_ftirs <- function(df) {
-  if("data.frame" %in% class(df)){
+  if ("data.frame" %in% class(df)) {
     class(df) <- c("ftirs", class(df))
-  } else{
+  } else {
     stop("Only objects with class 'data.frame' may be coerced to class 'ftirs'.")
   }
   return(df)
@@ -185,7 +185,8 @@ as_ftirs <- function(df) {
 
 
 
-#' A function that predicts bsi content based on our model with your data
+#' Predict percentage of BSi in samples
+#' `predict.ftirs()` outputs predicted percentage of BSi in testing samples based on a model trained on lake sediment core samples from Arctic lakes in Greenland and Alaska.
 #' @rdname ftirs
 #' @param object A wide, non-tidy `ftirs` dataframe.
 #' @param ... Other arguments passed on to generic predict method.
@@ -195,7 +196,7 @@ as_ftirs <- function(df) {
 #' @export
 
 predict.ftirs <- function(object, ...) {
-  if(ncol(object)<4){
+  if (ncol(object) < 4) {
     stop("Data must be in wide ftirs format to predict. Use pivot_wider().")
   }
   combined_artic_df_wide <- rbind(greenland, alaska) %>%
@@ -206,5 +207,3 @@ predict.ftirs <- function(object, ...) {
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
 }
-
-

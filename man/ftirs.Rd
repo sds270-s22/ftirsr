@@ -8,9 +8,9 @@
 \alias{pivot_longer.ftirs}
 \alias{predict.ftirs}
 \title{FTIRS class
-A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model}
+A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model and has access to the relevant class methods.}
 \usage{
-read_ftirs_file(single_filepath, interpolate = TRUE, ...)
+read_ftirs_file(single_filepath, interpolate = TRUE, accept = ".csv", ...)
 
 read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
@@ -43,15 +43,16 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 }
 \description{
 FTIRS class
-A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model
+A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model and has access to the relevant class methods.
 
-A function that generates a tibble from a single FTIRS sample
+Generates a tibble from a single FTIRS sample
 
-A function that generates a tidy data frame binding multiple FTIRS samples together
+Generate a tidy data frame binding multiple FTIRS samples together
 
-Function that pivots the FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
+Pivot a FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
 
-Function that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
+Pivot a wide, non-tidy FTIRS dataframe to a long, tidy format.
 
-A function that predicts bsi content based on our model with your data
+Predict percentage of BSi in samples
+\code{predict.ftirs()} outputs predicted percentage of BSi in testing samples based on a model trained on lake sediment core samples from Arctic lakes in Greenland and Alaska.
 }
