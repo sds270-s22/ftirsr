@@ -48,7 +48,7 @@ test_that("Checking read_ftirs_file", {
 
 
 test_that("Checking read_ftirs", {
-  expect_equal(as_ftirs(as_tibble(suppressWarnings(read_ftirs("test_samples")))), head(greenland %>% select(-2), 5643))
+  expect_equal(as.ftirs(as_tibble(suppressWarnings(read_ftirs("test_samples")))), head(greenland %>% select(-2), 5643))
   expect_error(read_ftirs("test_samples/FISK-10.0.csv"))
   expect_equal(ncol(suppressWarnings(read_ftirs("test_samples", "wet-chem-data.csv"))), 4)
   expect_error(suppressWarning(read_ftirs("test_samples", "test_samples")))

@@ -25,12 +25,12 @@ The `ftisr` package provides easy access and user-friendly methods for researche
 
 ## Motivation
 
-We draw motivation from [a previous project](https://www.causeweb.org/usproc/eusrc/2021/virtual-posters/7). Although packages that contain methods for PLSR already exist in the R universe, none provide the context and specific methods necessary for the implementation of such methods on a calibrated model specifically based on predicting BSi percentages. 
+We draw motivation from [this previous project](https://www.causeweb.org/usproc/eusrc/2021/virtual-posters/7). Although packages that contain methods for PLSR already exist in the R universe, none provide the context and specific methods necessary for the implementation of such methods on a calibrated model specifically based on predicting BSi percentages. 
 
 
 ## Installation
 
-Get the development version from GitHub:
+### Get the development version from GitHub:
 
 ```{r, eval = FALSE}
 # If you haven't installed the remotes package yet, do so:
@@ -61,15 +61,19 @@ In order to install the `ftirsr` package, you will need the following R packages
 
 ## Data
 
-Included in this package are two datasets. Both were sourced from the referenced [Capstone Group](https://github.com/sds-capstone/PLSmodel). The end-user format is tidy (long), with 4 variables:
+Included in this package are two datasets. Both were sourced from the referenced [Capstone Group](https://github.com/sds-capstone/PLSmodel). 
+
+
+- `alaska.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
+- `greenland.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
+
+
+The end-user format is tidy (long), with 4 variables:
 
 - `sample_id`: Core Sample ID referring to location and content of sample
 - `bsi`: Percentage of Biogenic Silica in Sample, determined by a wet chemical process
 - `wavenumber`: Wavenumber value (units = reciprocal centimeters)
 - `absorbance`: Absorbance levels
-
-- `alaska.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
-- `greenland.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
 
 Although these datasets are presented in tidy-format, we leave the option available for a non-tidy format (wide) data set. Both of these datasets may be referred to as Wet Chemistry data.
 
@@ -92,9 +96,9 @@ Anyone who is interested in exploring geology via spectroscopy and BSi. The meth
 
 - `pivot_wider.ftirs`: A method that pivots the FTIRS dataframe to wide, non-tidy format, necessary for input into a PLSR model. This method takes a long-format `ftirs` object and returns a wide, non-tidy formatted `ftirs` object.
 
-- `is_ftirs`: A method that checks if an object is an `ftirs` object. 
+- `is.ftirs`: A method that checks if an object is an `ftirs` object. 
 
-- `as_ftirs`: A method that will attach the `ftirs` attribute to an object.
+- `as.ftirs`: A method that will attach the `ftirs` attribute to an object.
 
 - `predict.ftirs`: A method that will predict BSi content based on the contained `ftirs` model with inputted data.
 
