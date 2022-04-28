@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE, warning = FALSE}
 library(ftirsr)
 library(dplyr)
 library(ggplot2)
@@ -92,9 +92,9 @@ Anyone who is interested in exploring geology via spectroscopy and BSi. The meth
 
 - `pivot_wider.ftirs`: A method that pivots the FTIRS dataframe to wide, non-tidy format, necessary for input into a PLSR model. This method takes a long-format `ftirs` object and returns a wide, non-tidy formatted `ftirs` object.
 
-- `is.ftirs`: A method that checks if an object is an `ftirs` object. 
+- `is_ftirs`: A method that checks if an object is an `ftirs` object. 
 
-- `as.ftirs`: A method that will attach the `ftirs` attribute to an object.
+- `as_ftirs`: A method that will attach the `ftirs` attribute to an object.
 
 - `predict.ftirs`: A method that will predict BSi content based on the contained `ftirs` model with inputted data.
 
