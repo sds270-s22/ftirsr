@@ -96,19 +96,12 @@ test_that("Checking is.ftirs", {
   expect_true(is.ftirs(greenland))
 })
 
-<<<<<<< HEAD
+
 test_that("Checking as.ftirs", {
   expect_error(as.ftirs(3))
   expect_error(as.ftirs("a"))
   expect_error(as.ftirs(greenland$wavenumber))
   expect_s3_class(as.ftirs(read_csv("test_samples/FISK-10.0.csv")), "ftirs")
-=======
-test_that("Checking as_ftirs", {
-  expect_error(as_ftirs(3))
-  expect_error(as_ftirs("a"))
-  expect_error(as_ftirs(greenland$wavenumber))
-  expect_s3_class(as_ftirs(read_csv("test_samples/FISK-10.0.csv")), "ftirs")
->>>>>>> 934deb8d993e753553db9f1a40a3593217fee663
 })
 
 # interpolate.R unit tests
