@@ -17,7 +17,7 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/ftirsr")
-#> Skipping install of 'ftirsr' from a github remote, the SHA1 (49c0af46) has not changed since last install.
+#> Skipping install of 'ftirsr' from a github remote, the SHA1 (f74c1df9) has not changed since last install.
 #>   Use `force = TRUE` to force installation
 ```
 
@@ -26,6 +26,7 @@ remotes::install_github("sds270-s22/ftirsr")
 ``` r
 library(ftirsr)
 library(tidyverse)
+library(pls)
 
 # This shows finding the maximum biogenic silica percentage in the dataset
 max(greenland$bsi)
@@ -1563,11 +1564,11 @@ summary(mod)
 #> VALIDATION: RMSEP
 #> Cross-validated using 10 random segments.
 #>        (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
-#> CV           6.848    4.539    4.273    4.097    3.943    3.658    3.813
-#> adjCV        6.848    4.537    4.266    4.089    3.926    3.651    3.782
+#> CV           6.848    4.556    4.327    4.157    4.035    3.926    3.945
+#> adjCV        6.848    4.553    4.317    4.150    4.016    3.907    3.913
 #>        7 comps  8 comps  9 comps  10 comps
-#> CV       3.760    3.801    3.686     3.857
-#> adjCV    3.707    3.746    3.633     3.788
+#> CV       4.060    4.232    4.083     4.130
+#> adjCV    3.986    4.149    3.998     4.042
 #> 
 #> TRAINING: % variance explained
 #>      1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps  8 comps

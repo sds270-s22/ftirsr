@@ -200,7 +200,8 @@ predict.ftirs <- function(object, ...) {
   mod <- arctic_mod()
 
   #our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
-  preds <- as.data.frame(predict(object = mod, newdata = object, ...))
+  preds <- as.data.frame(predict(object = mod, newdata = object, ...))%>%
+    rownames_to_column(var = "sample_id")
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
 }
@@ -208,12 +209,14 @@ predict.ftirs <- function(object, ...) {
 #' Returns the PLSR model used by `predict.ftirs()`
 #' @description This model is trained on arctic lake core samples from Alaska and Greenland.
 #' @importFrom pls plsr
+#' @importFrom tibble rownames_to_column
 #@rdname ftirs
 #' @export
 
 arctic_mod <- function(){
   combined_arctic_df_wide <- rbind(greenland, alaska) %>%
     pivot_wider()
+
   our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_arctic_df_wide,
                   validation = "CV", segments = 10)
 }

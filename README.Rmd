@@ -34,6 +34,7 @@ remotes::install_github("sds270-s22/ftirsr")
 ```{r example, message = FALSE, warning = FALSE}
 library(ftirsr)
 library(tidyverse)
+library(pls)
 
 # This shows finding the maximum biogenic silica percentage in the dataset
 max(greenland$bsi)
