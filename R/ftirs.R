@@ -82,7 +82,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   return(x)
 }
 
-#' Function that reads and attaches Wet Chemistry data to the FTIRS object
+#' Method that reads and attaches Wet Chemistry data to the FTIRS object
 #' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
 #' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
@@ -106,7 +106,7 @@ read_wet_chem <- function(filepath, data, ...) {
 
 
 
-#' Function that pivots the FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
+#' Method that pivots the FTIRS dataframe to wide, non-tidy format, necessary for input into a PLSR model.
 #' @rdname ftirs
 #' @param ftirs_data_long A long, tidy format FTIRS dataframe.
 #' @param ... Other arguments passed on to methods. Not currently used.
@@ -127,7 +127,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
   return(ftirs_data_wide)
 }
 
-#' Function that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
+#' Method that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
 #' @rdname ftirs
 #' @param ftirs_data_wide A wide, non-tidy FTIRS dataframe. Columns = wavenumber, rows = sample_id, and values = absorbance.
 #' @param wet_chem A logical value (`TRUE` or `FALSE`) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.
@@ -162,7 +162,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
   return(ftirs_data_long)
 }
 
-#' Function that checks if an object has the FTIRS class format
+#' Method that checks if an object has the FTIRS class format
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @export
@@ -170,11 +170,11 @@ is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
 
-#' Function that coerces data frame into object class `ftirs`
+#' Method that coerces data frame into object class `ftirs`
 #' This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
 #' @param df A data.frame to coerce to class `ftirs`.
 #' @export
-as_ftirs <- function(df) {
+as.ftirs <- function(df) {
   if("data.frame" %in% class(df)){
     class(df) <- c("ftirs", class(df))
   } else{
@@ -185,7 +185,7 @@ as_ftirs <- function(df) {
 
 
 
-#' A function that predicts bsi content based on our model with your data
+#' A Method that predicts BSi content based on our model with your data
 #' @rdname ftirs
 #' @param object A wide, non-tidy `ftirs` dataframe.
 #' @param ... Other arguments passed on to generic predict method.

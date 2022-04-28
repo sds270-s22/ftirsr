@@ -43,18 +43,90 @@ remotes::install_github("sds270-s22/ftirsr")
 library(ftirsr)
 ```
 
+### Necessary Packages:
+
+In order to install the `ftirs` package, you will need the following R packages:
+
+- `dplyr`
+- `magrittr`
+- `readr`
+- `purrr`
+- `janitor`
+- `fs`
+- `tidyr`
+- `tibble`
+- `pls`
+- `knitr`
+- `ggplot2`
 
 ## Data
 
 Included in this package are two datasets. Both were sourced from the referenced [Capstone Group](https://github.com/sds-capstone/PLSmodel). The end-user format is tidy (long), with 4 variables:
 
--`sample_id`: Core Sample ID referring to location and content of sample
--`bsi`: Percentage of Biogenic Silica in Sample, determined by a wet chemical process
--`wavenumber`: Wavenumber value (units = reciprocal centimeters)
--`absorbance`: Absorbance levels
+- `sample_id`: Core Sample ID referring to location and content of sample
+- `bsi`: Percentage of Biogenic Silica in Sample, determined by a wet chemical process
+- `wavenumber`: Wavenumber value (units = reciprocal centimeters)
+- `absorbance`: Absorbance levels
 
--`alaska.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
--`greenland.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
+- `alaska.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
+- `greenland.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
 
-Although these datasets are presented in tidy-format, we leave the option available for 
+Although these datasets are presented in tidy-format, we leave the option available for a non-tidy format (wide) data set. Both of these datasets may be referred to as Wet Chemistry data.
+
+## Who should use this package?
+
+Anyone who is interested in exploring geology via spectroscopy and BSi. The methods documented within this package are intended to ease the technical aspects of this field. 
+
+
+## Objects:
+
+- `ftirs`: The `ftirs` class attribute allows users to designate objects within their code as `ftirs` objects. An `ftirs` object is a modified dataframe that is properly formatted such that the dataframe may be used in a  PLSR model.
+
+## Methods: 
+
+- `read_ftirs`: A method that generates a tidy data frame binding multiple FTIRS samples together. This function takes in a directory file path, reads in each file within the directory, and returns an `ftirs` object.
+
+- `read_wet_chem`: A method that reads and attaches Wet Chemistry data to the FTIRS object. This function is called in `read_ftirs()` via the optional `wet_chem_path` argument. This method takes in an optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe and the corresponding FTIRS dataframe to have the Wet Chemistry Data attached to. It outputs the modified dataframe.
+
+- `pivot_longer.ftirs`: A method that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format. This method takes in an `ftirs` object that is a wide, non-tidy FTIRS dataframe. 
+
+- `pivot_wider.ftirs`: A method that pivots the FTIRS dataframe to wide, non-tidy format, necessary for input into a PLSR model. This method takes a long-format `ftirs` object and returns a wide, non-tidy formatted `ftirs` object.
+
+- `is.ftirs`: A method that checks if an object is an `ftirs` object. 
+
+- `as.ftirs`: A method that will attach the `ftirs` attribute to an object.
+
+- `predict.ftirs`: A method that will predict BSi content based on the contained `ftirs` model with inputted data.
+
+- `interpolate_ftirs`: A method to interpolate an `fitrs` dataset. This method takes in a series of vectors, `wavenumber`, `absorbance`, and `interpolate_vec` and returns a bound dataframe of these interpolated vectors.
+
+## Functions:
+
+- `read_ftirs_file`: A function that generates a tibble from a single FTIRS sample. This function takes in a single file path as an input and returns an `ftirs` object. This is a function meant to primarily be used only by developers.
+
+- `read_wet_chem`: A function that reads and attaches Wet Chemistry data to the FTIRS object.
+
+
+
+## Examples:
+
+**How can we upredict the amount of Biogenic Silica within organic samples given a series of data obtained from FTIR spectroscopy?**
+
+#### Step 1: Load the data
+```{r}
+
+```
+
+#### Step 2: Interpolate the data
+
+
+#### Step 3: Fit the model to the data
+
+
+#### Step 4: Obtain results
+
+
+
+
+
 
