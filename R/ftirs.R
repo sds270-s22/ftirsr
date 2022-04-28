@@ -4,7 +4,7 @@
 NULL
 
 #' Generates a tibble from a single FTIRS sample
-#' @rdname ftirs
+#@rdname ftirs
 #' @param single_filepath The filepath to an individual FTIR spectroscopy sample.
 #' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
 #' @param ... Other arguments passed on to `read_csv()`.
@@ -51,7 +51,7 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
 }
 
 #' Generate a tidy data frame binding multiple FTIRS samples together
-#' @rdname ftirs
+#@rdname ftirs
 #' @param dir_path Filepath to the folder that contains the csv files with FTIRS samples. Each file should be formatted such that there are three columns; index, `wavenumber` (numeric), and `absorbance` (numeric).
 #' @param wet_chem_path An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param format The desired format of the FTIRS dataframe; `long` (default) or `wide`.
@@ -103,7 +103,7 @@ read_wet_chem <- function(filepath, data, ...) {
 }
 
 #' Pivot a FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
-#' @rdname ftirs
+#@rdname ftirs
 #' @param ftirs_data_long A long, tidy format FTIRS dataframe.
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @importFrom magrittr %>%
@@ -124,7 +124,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
 }
 
 #' Pivot a wide, non-tidy FTIRS dataframe to a long, tidy format.
-#' @rdname ftirs
+#@rdname ftirs
 #' @param ftirs_data_wide A wide, non-tidy FTIRS dataframe. Columns = wavenumber, rows = sample_id, and values = absorbance.
 #' @param wet_chem A logical value (`TRUE` or `FALSE`) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.
 #' @param ... Other arguments passed on to methods. Not currently used.
@@ -183,7 +183,7 @@ as.ftirs <- function(df) {
 
 #' Predict percentage of BSi in samples
 #' `predict.ftirs()` outputs predicted percentage of BSi in testing samples based on a model trained on lake sediment core samples from Arctic lakes in Greenland and Alaska.
-#' @rdname ftirs
+#@rdname ftirs
 #' @param object A wide, non-tidy `ftirs` dataframe.
 #' @param ... Other arguments passed on to generic predict method.
 #' @import pls
@@ -195,11 +195,24 @@ predict.ftirs <- function(object, ...) {
   if (ncol(object) < 4) {
     stop("Data must be in wide ftirs format to predict. Use pivot_wider().")
   }
-  combined_artic_df_wide <- rbind(greenland, alaska) %>%
-    pivot_wider()
+  # combined_artic_df_wide <- rbind(greenland, alaska) %>%
+  #   pivot_wider()
+  mod <- arctic_mod()
 
-  our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
-  preds <- as.data.frame(predict(object = our_mod, newdata = object, ...))
+  #our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_artic_df_wide, validation = "CV", segments = 10)
+  preds <- as.data.frame(predict(object = mod, newdata = object, ...))
 
   # predplot(our_mod, ncomp = 10, newdata =  your_data, asp = 1, line = TRUE)
+}
+
+#' Returns the PLSR model used by `predict.ftirs()`.
+#' This model is trained on arctic lake core samples from Alaska and Greenland.
+#@rdname ftirs
+#' @importFrom pls plsr
+#' @export
+
+arctic_mod <- function(){
+  combined_arctic_df_wide <- rbind(greenland, alaska)
+  our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_arctic_df_wide,
+                  validation = "CV", segments = 10)
 }

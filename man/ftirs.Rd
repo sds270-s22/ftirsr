@@ -2,57 +2,9 @@
 % Please edit documentation in R/ftirs.R
 \name{ftirs}
 \alias{ftirs}
-\alias{read_ftirs_file}
-\alias{read_ftirs}
-\alias{pivot_wider.ftirs}
-\alias{pivot_longer.ftirs}
-\alias{predict.ftirs}
 \title{FTIRS class
 A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model and has access to the relevant class methods.}
-\usage{
-read_ftirs_file(single_filepath, interpolate = TRUE, ...)
-
-read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
-
-\method{pivot_wider}{ftirs}(ftirs_data_long, ...)
-
-\method{pivot_longer}{ftirs}(ftirs_data_wide, wet_chem, ...)
-
-\method{predict}{ftirs}(object, ...)
-}
-\arguments{
-\item{single_filepath}{The filepath to an individual FTIR spectroscopy sample.}
-
-\item{interpolate}{A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. \code{TRUE} is default.}
-
-\item{...}{Other arguments passed on to generic predict method.}
-
-\item{dir_path}{Filepath to the folder that contains the csv files with FTIRS samples. Each file should be formatted such that there are three columns; index, \code{wavenumber} (numeric), and \code{absorbance} (numeric).}
-
-\item{wet_chem_path}{An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.}
-
-\item{format}{The desired format of the FTIRS dataframe; \code{long} (default) or \code{wide}.}
-
-\item{ftirs_data_long}{A long, tidy format FTIRS dataframe.}
-
-\item{ftirs_data_wide}{A wide, non-tidy FTIRS dataframe. Columns = wavenumber, rows = sample_id, and values = absorbance.}
-
-\item{wet_chem}{A logical value (\code{TRUE} or \code{FALSE}) indicating presence of Wet Chemistry Data in the wide FTIRS dataframe.}
-
-\item{object}{A wide, non-tidy \code{ftirs} dataframe.}
-}
 \description{
 FTIRS class
 A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model and has access to the relevant class methods.
-
-Generates a tibble from a single FTIRS sample
-
-Generate a tidy data frame binding multiple FTIRS samples together
-
-Pivot a FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
-
-Pivot a wide, non-tidy FTIRS dataframe to a long, tidy format.
-
-Predict percentage of BSi in samples
-\code{predict.ftirs()} outputs predicted percentage of BSi in testing samples based on a model trained on lake sediment core samples from Arctic lakes in Greenland and Alaska.
 }

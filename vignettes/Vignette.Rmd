@@ -104,6 +104,8 @@ Anyone who is interested in exploring geology via spectroscopy and BSi. The meth
 
 - `interpolate_ftirs`: A method to interpolate an `fitrs` dataset. This method takes in a series of vectors, `wavenumber`, `absorbance`, and `interpolate_vec` and returns a bound dataframe of these interpolated vectors.
 
+- `arctic_mod`: A function that returns the PLSR model used by `predict.ftirs()` to predict BSi percentages from testing data.
+
 ## Functions:
 
 - `read_ftirs_file`: A function that generates a tibble from a single FTIRS sample. This function takes in a single file path as an input and returns an `ftirs` object. This is a function meant to primarily be used only by developers.
