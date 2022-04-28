@@ -92,8 +92,8 @@ test_that("Checking pivot_longer.ftirs", {
 })
 
 test_that("Checking is_ftirs", {
-  expect_false(is.ftirs(3))
-  expect_true(is.ftirs(greenland))
+  expect_false(is_ftirs(3))
+  expect_true(is_ftirs(greenland))
 })
 
 test_that("Checking as_ftirs", {
