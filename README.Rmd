@@ -98,10 +98,9 @@ preds
 # If we want to see the details of the training model, we can call arctic_mod() 
 mod <- arctic_mod()
 summary(mod)
-```
-```{r}
+
 # We can also use this to create plots with predictions
-pplot <- pls::predplot(mod, ncomp = 10, newdata =  my_data_wide, asp = 1, line = TRUE)
+pplot <- pls::predplot(mod,  newdata =  my_data_wide, asp = 1, line = TRUE)
 
 pplot
 ```

@@ -17,16 +17,8 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/ftirsr")
-#> Downloading GitHub repo sds270-s22/ftirsr@HEAD
-#> 
-#>      checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpIMzTOf/remotes53c936c2f0ba/sds270-s22-ftirsr-6af5cb7/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpIMzTOf/remotes53c936c2f0ba/sds270-s22-ftirsr-6af5cb7/DESCRIPTION’
-#>   ─  preparing ‘ftirsr’:
-#>      checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
-#>   ─  checking for LF line-endings in source and make files and shell scripts
-#>   ─  checking for empty or unneeded directories
-#>   ─  building ‘ftirsr_0.0.0.9001.tar.gz’
-#>      
-#> 
+#> Skipping install of 'ftirsr' from a github remote, the SHA1 (49c0af46) has not changed since last install.
+#>   Use `force = TRUE` to force installation
 ```
 
 ## Example
@@ -1562,12 +1554,41 @@ preds
 ``` r
 # If we want to see the details of the training model, we can call arctic_mod() 
 mod <- arctic_mod()
-summary(mod())
+summary(mod)
+#> Data:    X dimension: 128 1881 
+#>  Y dimension: 128 1
+#> Fit method: kernelpls
+#> Number of components considered: 10
+#> 
+#> VALIDATION: RMSEP
+#> Cross-validated using 10 random segments.
+#>        (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
+#> CV           6.848    4.539    4.273    4.097    3.943    3.658    3.813
+#> adjCV        6.848    4.537    4.266    4.089    3.926    3.651    3.782
+#>        7 comps  8 comps  9 comps  10 comps
+#> CV       3.760    3.801    3.686     3.857
+#> adjCV    3.707    3.746    3.633     3.788
+#> 
+#> TRAINING: % variance explained
+#>      1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps  8 comps
+#> X      76.96    84.01     90.2    93.13    94.83    97.28    97.51    97.88
+#> bsi    56.53    64.18     67.9    72.45    76.19    77.71    81.44    82.70
+#>      9 comps  10 comps
+#> X      98.12     98.48
+#> bsi    84.22     85.08
 
 # We can also use this to create plots with predictions
-pplot <- pls::predplot(mod, ncomp = 10, newdata =  my_data_wide, asp = 1, line = TRUE)
+pplot <- pls::predplot(mod,  newdata =  my_data_wide, asp = 1, line = TRUE)
+```
 
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+
+``` r
 pplot
+#>            measured predicted
+#> FISK-10.0     20.37  15.79963
+#> FISK-110.0    11.82  14.32237
+#> FISK-270.0    11.29  15.13158
 ```
 
 ``` r
