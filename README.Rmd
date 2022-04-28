@@ -96,8 +96,15 @@ preds <- predict(my_data_wide, ncomp = 4)
 preds
 ```
 
-```{r}
-# If we want to see the details of the training model, we can call he
+```{r, eval = FALSE}
+# If we want to see the details of the training model, we can call arctic_mod() 
+mod <- arctic_mod()
+summary(mod())
+
+# We can also use this to create plots with predictions
+pplot <- pls::predplot(mod, ncomp = 10, newdata =  my_data_wide, asp = 1, line = TRUE)
+
+pplot
 ```
 
 ```{r, warning = FALSE, message = FALSE}
@@ -107,5 +114,6 @@ one_sample <- read_ftirs_file(single_filepath = "~/ftirsr/tests/testthat/test_sa
 
 head(one_sample)
 ```
+
 
 

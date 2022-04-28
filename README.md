@@ -18,7 +18,7 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/ftirsr")
-#> Skipping install of 'ftirsr' from a github remote, the SHA1 (45bf6ad7) has not changed since last install.
+#> Skipping install of 'ftirsr' from a github remote, the SHA1 (9ca4af67) has not changed since last install.
 #>   Use `force = TRUE` to force installation
 ```
 
@@ -1553,7 +1553,14 @@ preds
 ```
 
 ``` r
-# If we want to see the details of the training model, we can call he
+# If we want to see the details of the training model, we can call arctic_mod() 
+mod <- arctic_mod()
+summary(mod())
+
+# We can also use this to create plots with predictions
+pplot <- pls::predplot(mod, ncomp = 10, newdata =  my_data_wide, asp = 1, line = TRUE)
+
+pplot
 ```
 
 ``` r
