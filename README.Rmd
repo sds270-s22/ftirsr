@@ -41,23 +41,23 @@ library(tidyverse)
 max(greenland$bsi)
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # This shows how to easily read a directory of FTIRS samples into R while attaching Wet Chemistry values and interpolating onto a vector of rounded wavenumbers for ease of interpretation
 
 my_data <- read_ftirs(dir_path = "~/ftirsr/tests/testthat/test_samples",
                       wet_chem_path = "~/ftirsr/tests/testthat/wet-chem-data.csv")
 
-my_data
+head(my_data)
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # This shows how to read a directory without interpolation
 # Note the difference in wavenumbers
 my_data_no_interp <- read_ftirs(dir_path = "~/ftirsr/tests/testthat/test_samples",
                       wet_chem_path = "~/ftirsr/tests/testthat/wet-chem-data.csv",
                       interpolate = FALSE)
 
-my_data_no_interp
+head(my_data_no_interp)
 
 ```
 
@@ -66,7 +66,7 @@ my_data_no_interp
 my_data_wide <- my_data %>%
   pivot_wider()
 
-my_data_wide
+head(my_data_wide)
 ```
 
 ```{r}
@@ -75,7 +75,7 @@ my_data_wide
 my_data_long <- my_data_wide %>%
   pivot_longer(wet_chem = TRUE)
 
-my_data_long
+head(my_data_long)
 ```
 
 
@@ -100,12 +100,12 @@ preds
 # If we want to see the details of the training model, we can call he
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # It is also possible to read a single sample file using read_ftirs_file()
 
 one_sample <- read_ftirs_file(single_filepath = "~/ftirsr/tests/testthat/test_samples/FISK-10.0.csv")
 
-one_sample
+head(one_sample)
 ```
 
 
