@@ -212,7 +212,8 @@ predict.ftirs <- function(object, ...) {
 #' @export
 
 arctic_mod <- function(){
-  combined_arctic_df_wide <- rbind(greenland, alaska)
+  combined_arctic_df_wide <- rbind(greenland, alaska) %>%
+    pivot_wider()
   our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_arctic_df_wide,
                   validation = "CV", segments = 10)
 }
