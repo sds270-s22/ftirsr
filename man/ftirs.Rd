@@ -10,7 +10,7 @@
 \title{FTIRS class
 A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model and has access to the relevant class methods.}
 \usage{
-read_ftirs_file(single_filepath, interpolate = TRUE, accept = ".csv", ...)
+read_ftirs_file(single_filepath, interpolate = TRUE, ...)
 
 read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
