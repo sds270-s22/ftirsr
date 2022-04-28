@@ -10,7 +10,7 @@
 \title{FTIRS class
 A class attribute that is a modified dataframe that is in the proper format to be used in a Partial Least Squares Regression model and has access to the relevant class methods.}
 \usage{
-read_ftirs_file(single_filepath, interpolate = TRUE, accept = ".csv", ...)
+read_ftirs_file(single_filepath, interpolate = TRUE, ...)
 
 read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 
@@ -49,18 +49,10 @@ Generates a tibble from a single FTIRS sample
 
 Generate a tidy data frame binding multiple FTIRS samples together
 
-<<<<<<< HEAD
-Method that pivots the FTIRS dataframe to wide, non-tidy format, necessary for input into a PLSR model.
-
-Method that pivots a wide, non-tidy FTIRS dataframe to a long, tidy format.
-
-A Method that predicts BSi content based on our model with your data
-=======
 Pivot a FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
 
 Pivot a wide, non-tidy FTIRS dataframe to a long, tidy format.
 
 Predict percentage of BSi in samples
 \code{predict.ftirs()} outputs predicted percentage of BSi in testing samples based on a model trained on lake sediment core samples from Arctic lakes in Greenland and Alaska.
->>>>>>> db26ef2ca6653b0870fbc8453a16377bb30315ad
 }

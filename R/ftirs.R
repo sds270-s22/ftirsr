@@ -16,7 +16,7 @@ NULL
 #' @importFrom purrr map_dfr
 #' @export
 
-read_ftirs_file <- function(single_filepath, interpolate = TRUE, accept = ".csv", ...) {
+read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
   x <- read_csv(single_filepath, ...)
   x <- x %>%
     as_tibble()
