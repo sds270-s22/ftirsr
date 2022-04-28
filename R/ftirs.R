@@ -81,7 +81,8 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
   return(x)
 }
 
-#' Reads and attach Wet Chemistry data to an FTIRS object
+
+#' Read and attach Wet Chemistry data to an FTIRS object
 #' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
 #' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
@@ -105,6 +106,7 @@ read_wet_chem <- function(filepath, data, ...) {
 
 
 
+
 #' Pivot a FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
 #' @rdname ftirs
 #' @param ftirs_data_long A long, tidy format FTIRS dataframe.
@@ -125,6 +127,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
   ftirs_data_wide <- as_ftirs(ftirs_data_wide)
   return(ftirs_data_wide)
 }
+
 
 #' Pivot a wide, non-tidy FTIRS dataframe to a long, tidy format.
 #' @rdname ftirs
@@ -162,6 +165,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
   return(ftirs_data_long)
 }
 
+
 #' Check if an object has the FTIRS class format
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
@@ -169,6 +173,7 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
 is_ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
+
 
 #' Coerce data frame into object class `ftirs`
 #' This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
@@ -182,6 +187,7 @@ as_ftirs <- function(df) {
   }
   return(df)
 }
+
 
 
 
