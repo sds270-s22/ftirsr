@@ -7,7 +7,6 @@ NULL
 #' @rdname ftirs
 #' @param single_filepath The filepath to an individual FTIR spectroscopy sample.
 #' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
-#'
 #' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom magrittr %>%
 #' @import dplyr
