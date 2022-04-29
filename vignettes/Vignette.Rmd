@@ -122,7 +122,7 @@ Anyone who is interested in exploring geology via spectroscopy and BSi. The meth
 
 In this example, we are interpolating the samples onto the vector of rounded wavenumbers used in our model.
 
-```{r, message = FALSE, warning = FALSE}
+```{r, message = FALSE, warning = FALSE, eval = FALSE}
 my_data <- read_ftirs(dir_path = here::here("~/ftirsr/tests/testthat/test_samples"))
 
 my_data
@@ -130,6 +130,10 @@ my_data
 
 ```{r}
 greenland
+```
+
+```{r}
+is.ftirs(greenland)
 ```
 
 #### Step 2: Fit the model to the data
