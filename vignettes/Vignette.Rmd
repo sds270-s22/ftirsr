@@ -20,6 +20,7 @@ library(ftirsr)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
+library(pls)
 ```
 
 The `ftisr` package provides easy access and user-friendly methods for researchers analyzing Biogenic Silica (BSi). (BSi) is used as a proxy for past temperatures in High Arctic settings. Typically, greater amounts of BSi in sediment cores indicate warmer temperatures. Recently paleoclimatologists have begun to use Fourier Transform Infrared (FTIR) spectroscopy to collect information on BSi. However, the offloaded relative absorbency data makes comparison with other proxies difficult. This [project](https://github.com/sds270-s22/ftirsr) is intended to develop an R package to facilitate analysis of multivariate-length samples using a model and observations in collaboration with [the Smith College PLSR SDS Capstone group](https://github.com/sds-capstone/PLSmodel). 
@@ -129,21 +130,57 @@ my_data <- read_ftirs(dir_path = "samples")
 head(my_data)
 ```
 
+But, we don't have to interpolate! The default is `interpolate = TRUE`, but we can set it to `interpolate = FALSE`.
 
+```{r, warning = FALSE, message = FALSE}
+# This shows how to read a directory without interpolation
+# Note the difference in wavenumbers
+my_data_no_interp <- read_ftirs(dir_path = "samples",
+                      interpolate = FALSE)
 
-#### Step 2: Fit the model to the data
+head(my_data_no_interp)
+```
+
+We can include Wet Chemistry data in our `ftirs` dataframe. This is necessary to use this data to train a PLS model. (Note: to predict, we don't want to include BSi in our `ftirs` dataframe).
+
+```{r, warning = FALSE, message = FALSE}
+# All we have to do is add a path to the file containing the Wet Chemistry data
+my_data_wet_chem <- read_ftirs(dir_path = "samples", 
+                               wet_chem_path = "wet-chem-data.csv")
+
+```
+
+It is also possible to read a single sample file using `read_ftirs_file()`.
+
+```{r, warning = FALSE, message = FALSE}
+one_sample <- read_ftirs_file(single_filepath = "samples/FISK-10.0.csv")
+
+head(one_sample)
+```
+
+#### Step 2: Predict data using trained model 
 
 ```{r, message = FALSE, warning = FALSE}
 # Data must be in the ftirs wide format in order to use predict method
-my_data_wide <- read_ftirs(dir_path = "samples", format = 
-                        "wide") 
- my_data_wide2 <- my_data %>% 
-   pivot_wider()
- 
- head(my_data_wide2)
+my_data_wide <- my_data %>% 
+  pivot_wider()
+
+head(my_data_wide[1:8])
+```
+
+```{r, message = FALSE, warning = FALSE}
+# We could get this same result by calling format = "wide" while reading in the samples  
+my_data_wide <- read_ftirs(dir_path = "samples",
+                      format = "wide")
+
+head(my_data_wide[1:8])
 ```
 
 ```{r}
+# Data must have the ftirs class to call the correct predict.ftirs() method
+is.ftirs(my_data_wide)
+
+# Call predict
 preds <- predict(my_data_wide)
 ```
 
@@ -153,16 +190,26 @@ preds <- predict(my_data_wide)
 preds
 ```
 
+```{r}
+# We can specify the number of components we want to see, as this is inherited from the predict.mvr method
+
+# Here we are predicting the same values as above, but choosing only 4 components
+preds <- predict(my_data_wide, ncomp = 4)
+preds
+```
+
+```{r}
+# If we want to see the details of the training model, we can call arctic_mod() 
+mod <- arctic_mod()
+summary(mod)
+
+```
 
 ```{r, include = FALSE, eval = FALSE}
 ggplot(preds[1,], aes(x = FISK.10, y = bsi))
 ```
 
-
-
-
-
-
+The functionality demonstrated above are just a few common examples to help a user get started using our package. 
 
 
 

@@ -29,8 +29,7 @@ The development version from GitHub can be accessed like so:
 remotes::install_github("sds270-s22/ftirsr")
 ```
 
-## Example
-
+## Examples
 
 ```{r example, message = FALSE, warning = FALSE}
 library(ftirsr)
@@ -50,16 +49,6 @@ my_data <- read_ftirs(dir_path = "~/ftirsr/tests/testthat/test_samples",
 head(my_data)
 ```
 
-```{r, warning = FALSE, message = FALSE}
-# This shows how to read a directory without interpolation
-# Note the difference in wavenumbers
-my_data_no_interp <- read_ftirs(dir_path = "~/ftirsr/tests/testthat/test_samples",
-                      wet_chem_path = "~/ftirsr/tests/testthat/wet-chem-data.csv",
-                      interpolate = FALSE)
-
-head(my_data_no_interp)
-
-```
 
 ```{r}
  # This shows pivoting the ftirs dataframe to the wide format necessary to run in a PLS model
@@ -79,7 +68,6 @@ my_data_long <- my_data_wide %>%
 head(my_data_long)
 ```
 
-
 ```{r}
 # We can confirm that this object is class `ftirs`, which is necessary to access methods, such as predict.ftirs()
 is.ftirs(my_data_wide)
@@ -91,30 +79,7 @@ preds <- predict(my_data_wide)
 preds
 ```
 
-```{r}
-# We can specify the number of components we want to see, as this is inherited from the predict.mvr method
-preds <- predict(my_data_wide, ncomp = 4)
-preds
-```
-
-```{r}
-# If we want to see the details of the training model, we can call arctic_mod() 
-mod <- arctic_mod()
-summary(mod)
-
-# We can also use this to create plots with predictions
-pplot <- pls::predplot(mod,  newdata =  my_data_wide, asp = 1, line = TRUE)
-
-pplot
-```
-
-```{r, warning = FALSE, message = FALSE}
-# It is also possible to read a single sample file using read_ftirs_file()
-
-one_sample <- read_ftirs_file(single_filepath = "~/ftirsr/tests/testthat/test_samples/FISK-10.0.csv")
-
-head(one_sample)
-```
+For more usage, please see our [vignette](https://github.com/sds270-s22/ftirsr/blob/main/vignettes/Vignette.Rmd).
 
 
 
