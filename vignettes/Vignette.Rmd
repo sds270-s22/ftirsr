@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 library(ftirsr)
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 ```
 
 The `ftisr` package provides easy access and user-friendly methods for researchers analyzing Biogenic Silica (BSi). (BSi) is used as a proxy for past temperatures in High Arctic settings. Typically, greater amounts of BSi in sediment cores indicate warmer temperatures. Recently paleoclimatologists have begun to use Fourier Transform Infrared (FTIR) spectroscopy to collect information on BSi. However, the offloaded relative absorbency data makes comparison with other proxies difficult. This [project](https://github.com/sds270-s22/ftirsr) is intended to develop an R package to facilitate analysis of multivariate-length samples using a model and observations in collaboration with [the Smith College PLSR SDS Capstone group](https://github.com/sds-capstone/PLSmodel). 
@@ -125,37 +126,36 @@ In this example, we are interpolating the samples onto the vector of rounded wav
 ```{r, message = FALSE, warning = FALSE}
 my_data <- read_ftirs(dir_path = "samples")
 
-my_data
+head(my_data)
 ```
 
-```{r}
-greenland
-```
 
-```{r}
-is.ftirs(greenland)
-```
 
 #### Step 2: Fit the model to the data
 
-```{r, eval = FALSE}
-library(ftirsr)
-# Data must be in the ftirs wide format
-my_data_wide <- my_data %>% 
-  ftirsr::pivot_wider.ftirsr()
+```{r, message = FALSE, warning = FALSE}
+# Data must be in the ftirs wide format in order to use predict method
+my_data_wide <- read_ftirs(dir_path = "samples", format = 
+                        "wide") 
+ my_data_wide2 <- my_data %>% 
+   pivot_wider()
+ 
+ head(my_data_wide2)
+```
 
+```{r}
 preds <- predict(my_data_wide)
 ```
 
 #### Step 3: Obtain results
 
-```{r, eval = FALSE}
+```{r}
 preds
 ```
 
 
-```{r}
-#ggplot(preds[1,], aes(x = FISK.10, y = bsi))
+```{r, include = FALSE, eval = FALSE}
+ggplot(preds[1,], aes(x = FISK.10, y = bsi))
 ```
 
 
