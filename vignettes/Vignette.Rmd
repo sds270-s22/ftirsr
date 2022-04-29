@@ -64,8 +64,8 @@ In order to install the `ftirsr` package, you will need the following R packages
 Included in this package are two datasets. Both were sourced from the referenced [Capstone Group](https://github.com/sds-capstone/PLSmodel). 
 
 
-- `alaska.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
-- `greenland.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
+- `alaska.csv`: A dataset containing absorbance spectra for 103 Alaska lake sediment core samples across 1882 wavenumbers.
+- `greenland.csv`: A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 1882 wavenumbers.
 
 
 The end-user format is tidy (long), with 4 variables:
@@ -128,17 +128,18 @@ my_data <- read_ftirs(dir_path = "~/ftirsr/tests/testthat/test_samples")
 
 #### Step 2: Fit the model to the data
 
-```{r}
+```{r, eval = FALSE}
+library(ftirsr)
 # Data must be in the ftirs wide format
 my_data_wide <- my_data %>% 
-  ftirsr::pivot_wider()
+  ftirsr::pivot_wider.ftirsr()
 
 preds <- predict(my_data_wide)
 ```
 
 #### Step 3: Obtain results
 
-```{r}
+```{r, eval = FALSE}
 preds
 ```
 
