@@ -21,8 +21,16 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/ftirsr")
-#> Skipping install of 'ftirsr' from a github remote, the SHA1 (6c947fb4) has not changed since last install.
-#>   Use `force = TRUE` to force installation
+#> Downloading GitHub repo sds270-s22/ftirsr@HEAD
+#> 
+#>      checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpumJBT2/remotes8a3869f958b0/sds270-s22-ftirsr-8efed4a/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/5m/f1fw5syx5w7d8y1h6wrj0nrm0000gn/T/RtmpumJBT2/remotes8a3869f958b0/sds270-s22-ftirsr-8efed4a/DESCRIPTION’
+#>   ─  preparing ‘ftirsr’:
+#>      checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘ftirsr_0.0.0.9001.tar.gz’
+#>      
+#> 
 ```
 
 ## Example
@@ -1568,11 +1576,11 @@ summary(mod)
 #> VALIDATION: RMSEP
 #> Cross-validated using 10 random segments.
 #>        (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
-#> CV           6.848    4.553    4.347    4.171    4.030    3.882    3.851
-#> adjCV        6.848    4.550    4.340    4.170    4.008    3.860    3.819
+#> CV           6.848    4.566    4.346    4.208    4.087    3.971    3.963
+#> adjCV        6.848    4.562    4.335    4.197    4.065    3.949    3.931
 #>        7 comps  8 comps  9 comps  10 comps
-#> CV       3.857    3.847    3.931     3.936
-#> adjCV    3.800    3.791    3.859     3.858
+#> CV       4.114    4.110    4.093     4.183
+#> adjCV    4.045    4.039    4.007     4.094
 #> 
 #> TRAINING: % variance explained
 #>      1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps  8 comps

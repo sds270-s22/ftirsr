@@ -81,7 +81,8 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 }
 
 #' Read and attach Wet Chemistry data to an FTIRS object
-#' This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
+#' @description This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
+# @rdname ftirs
 #' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
 #' @param ... Other arguments passed on to `read_csv()`.
@@ -103,7 +104,7 @@ read_wet_chem <- function(filepath, data, ...) {
 }
 
 #' Pivot a FTIRS dataframe to wider, non-tidy format, necessary for input into a PLSR model.
-#@rdname ftirs
+# @rdname ftirs
 #' @param ftirs_data_long A long, tidy format FTIRS dataframe.
 #' @param ... Other arguments passed on to methods. Not currently used.
 #' @importFrom magrittr %>%
@@ -115,7 +116,8 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
   ftirs_data_wide <- as_tibble(ftirs_data_long) %>%
     pivot_wider(
       names_from = "wavenumber",
-      values_from = "absorbance"
+      values_from = "absorbance",
+      ...
     ) %>%
     column_to_rownames(var = "sample_id")
 
