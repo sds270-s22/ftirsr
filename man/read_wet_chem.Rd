@@ -7,7 +7,7 @@
 read_wet_chem(filepath, data, ...)
 }
 \arguments{
-\item{filepath}{An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.}
+\item{filepath}{An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe. At present development, this file must be a .csv with a column containing a row for each sample and its corresponding Wet Chem BSi percentage.}
 
 \item{data}{The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.}
 

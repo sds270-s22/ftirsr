@@ -13,8 +13,10 @@ status](https://www.r-pkg.org/badges/version/ftirsr)](https://CRAN.R-project.org
 
 The goal of `ftirsr` is to help easily create a Partial Least Squares
 Regression model to estimate composition of natural compounds such as
-Biogenic Silica and Total Organic Carbon in lake sediment core samples.
-This package aids a user in eliminating
+Biogenic Silica (BSi) and Total Organic Carbon in lake sediment core
+samples. This package aids a user in eliminating the difficulties of
+loading and cleaning cumbersome samples into R, and allows a user to
+predict BSi content in their samples without Wet Chemistry data.
 
 ## Installation
 
@@ -55,14 +57,20 @@ head(my_data)
 ``` r
  # This shows pivoting the ftirs dataframe to the wide format necessary to run in a PLS model
 my_data_wide <- my_data %>%
-  pivot_wider()
+  pivot_wider() %>%
+  # We shouldn't include BSi col in prediction
+  select(-1)
 
 # Showing the first 5 columns and the first 10 rows
 head(my_data_wide[1:5], 10)
-#>              bsi          3996          3994          3992          3991
-#> FISK-10.0  20.37  0.0007000000  0.0007020861  0.0006977220  0.0006717982
-#> FISK-110.0 11.82 -0.0235148501 -0.0235046029 -0.0235894673 -0.0236516844
-#> FISK-270.0 11.29  0.0005814169  0.0005024497  0.0003133435  0.0002148331
+#>                     3996          3994          3992          3991
+#> FISK-10.0   0.0007000000  0.0007020861  0.0006977220  0.0006717982
+#> FISK-110.0 -0.0235148501 -0.0235046029 -0.0235894673 -0.0236516844
+#> FISK-270.0  0.0005814169  0.0005024497  0.0003133435  0.0002148331
+#>                     3989
+#> FISK-10.0   6.199506e-04
+#> FISK-110.0 -2.374408e-02
+#> FISK-270.0  7.388141e-05
 ```
 
 ``` r
@@ -73,14 +81,14 @@ my_data_long <- my_data_wide %>%
 
 head(my_data_long)
 #> # A tibble: 6 × 4
-#>   sample_id   bsi wavenumber absorbance
-#>   <chr>     <dbl>      <dbl>      <dbl>
-#> 1 FISK-10.0  20.4       3996   0.0007  
-#> 2 FISK-10.0  20.4       3994   0.000702
-#> 3 FISK-10.0  20.4       3992   0.000698
-#> 4 FISK-10.0  20.4       3991   0.000672
-#> 5 FISK-10.0  20.4       3989   0.000620
-#> 6 FISK-10.0  20.4       3987   0.000551
+#>   sample_id `3996` wavenumber absorbance
+#>   <chr>      <dbl>      <dbl>      <dbl>
+#> 1 FISK-10.0 0.0007       3994   0.000702
+#> 2 FISK-10.0 0.0007       3992   0.000698
+#> 3 FISK-10.0 0.0007       3991   0.000672
+#> 4 FISK-10.0 0.0007       3989   0.000620
+#> 5 FISK-10.0 0.0007       3987   0.000551
+#> 6 FISK-10.0 0.0007       3985   0.000461
 ```
 
 ``` r

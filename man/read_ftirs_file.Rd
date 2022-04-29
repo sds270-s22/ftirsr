@@ -7,7 +7,7 @@
 read_ftirs_file(single_filepath, interpolate = TRUE, ...)
 }
 \arguments{
-\item{single_filepath}{The filepath to an individual FTIR spectroscopy sample.}
+\item{single_filepath}{The filepath to an individual FTIR spectroscopy sample. At present development stage, the sample has to be a .csv file with a wavenumber column, followed by an absorbance column.}
 
 \item{interpolate}{A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. \code{TRUE} is default.}
 

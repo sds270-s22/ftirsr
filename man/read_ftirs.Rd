@@ -18,3 +18,6 @@ read_ftirs(dir_path, wet_chem_path = NULL, format = "long", ...)
 \description{
 Generate a tidy data frame binding multiple FTIRS samples together
 }
+\seealso{
+\code{read_ftirs_files} for file specifications.
+}

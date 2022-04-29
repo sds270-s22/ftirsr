@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 # ftirsr <img src="./data-raw/Sticker/ftiRRRs.png" align="right" height=140/>
 
 
-The goal of `ftirsr` is to help easily create a Partial Least Squares Regression model to estimate composition of natural compounds such as Biogenic Silica and Total Organic Carbon in lake sediment core samples. This package aids a user in eliminating
+The goal of `ftirsr` is to help easily create a Partial Least Squares Regression model to estimate composition of natural compounds such as Biogenic Silica (BSi) and Total Organic Carbon in lake sediment core samples. This package aids a user in eliminating the difficulties of loading and cleaning cumbersome samples into R, and allows a user to predict BSi content in their samples without Wet Chemistry data.
 
 ## Installation
 
@@ -53,7 +53,9 @@ head(my_data)
 ```{r}
  # This shows pivoting the ftirs dataframe to the wide format necessary to run in a PLS model
 my_data_wide <- my_data %>%
-  pivot_wider()
+  pivot_wider() %>%
+  # We shouldn't include BSi col in prediction
+  select(-1)
 
 # Showing the first 5 columns and the first 10 rows
 head(my_data_wide[1:5], 10)

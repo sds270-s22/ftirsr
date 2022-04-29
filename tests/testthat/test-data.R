@@ -107,6 +107,11 @@ test_that("Checking as.ftirs", {
 
 })
 
+test_that("Checking predict", {
+  expect_error(predict(greenland))
+  expect_error(predict(greenland %>% select(-1)))
+})
+
 # interpolate.R unit tests
 test_that("Checking interpolation", {
   one_sample <- suppressWarnings(read_ftirs_file("test_samples/FISK-10.0.csv", interpolate = FALSE))
@@ -114,5 +119,6 @@ test_that("Checking interpolation", {
   multiple_sample <- suppressWarnings(read_ftirs("test_samples", interpolate = FALSE))
   expect_equal(suppressWarnings(interpolate_ftirs(one_sample$wavenumber, one_sample$absorbance, rounded_wavenumbers$wavenumber)$wavenumber), rounded_wavenumbers$wavenumber)
   expect_warning(interpolate_ftirs(multiple_sample$wavenumber, multiple_sample$absorbance, rounded_wavenumbers$wavenumber))
-  expect_equal(names(interpolate_ftirs(one_sample$wavenumber, one_sample$absorbance, rounded_wavenumbers$wavenumber)), c("wavenumber", "absorbance"))
+  expect_equal(names(suppressWarnings(interpolate_ftirs(one_sample$wavenumber, one_sample$absorbance, rounded_wavenumbers$wavenumber))), c("wavenumber", "absorbance"))
 })
+

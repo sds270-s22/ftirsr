@@ -5,7 +5,7 @@ NULL
 
 #' Generates a tibble from a single FTIRS sample
 #@rdname ftirs
-#' @param single_filepath The filepath to an individual FTIR spectroscopy sample.
+#' @param single_filepath The filepath to an individual FTIR spectroscopy sample. At present development stage, the sample has to be a .csv file with a wavenumber column, followed by an absorbance column.
 #' @param interpolate A logical value choosing to interpolate absorbance values onto a set of whole number wavenumbers. `TRUE` is default.
 #' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom magrittr %>%
@@ -15,6 +15,7 @@ NULL
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map_dfr
 #' @export
+
 
 read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
   x <- read_csv(single_filepath, ...)
@@ -60,6 +61,7 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
 #' @import dplyr
 #' @importFrom purrr map_dfr
 #' @import readr
+#' @seealso `read_ftirs_files` for file specifications.
 #' @export
 
 read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
@@ -83,7 +85,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' Read and attach Wet Chemistry data to an FTIRS object
 #' @description This function is called in `read_ftirs()` via the optional `wet_chem_path` argument.
 # @rdname ftirs
-#' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe.
+#' @param filepath An optional filepath to singular Wet Chemistry Data file to be included in the FTIRS dataframe. At present development, this file must be a .csv with a column containing a row for each sample and its corresponding Wet Chem BSi percentage.
 #' @param data The corresponding FTIRS dataframe to have the Wet Chemistry Data attached to.
 #' @param ... Other arguments passed on to `read_csv()`.
 #' @importFrom readr read_csv

@@ -171,7 +171,7 @@ head(my_data_wide[1:8])
 ```{r, message = FALSE, warning = FALSE}
 # We could get this same result by calling format = "wide" while reading in the samples  
 my_data_wide <- read_ftirs(dir_path = "samples",
-                      format = "wide")
+                      format = "wide") 
 
 head(my_data_wide[1:8])
 ```
