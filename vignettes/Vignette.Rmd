@@ -192,7 +192,7 @@ preds <- predict(my_data_wide)
 preds
 ```
 
-```{r, eval = FALSE}
+```{r}
 # We can specify the number of components we want to see, as this is inherited from the predict.mvr method
 
 # Here we are predicting the same values as above, but choosing only 4 components

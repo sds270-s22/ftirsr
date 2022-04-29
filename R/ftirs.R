@@ -198,7 +198,9 @@ predict.ftirs <- function(object, ...) {
   if (ncol(object) < 4) {
     stop("Data must be in wide ftirs format to predict. Use pivot_wider().")
   }
-  if("bsi" %in% names(object))
+  if("bsi" %in% names(object)){
+    stop("Wet Chem data should not be included when predicting. Please delete this column.")
+  }
   # combined_artic_df_wide <- rbind(greenland, alaska) %>%
   #   pivot_wider()
   mod <- arctic_mod()
