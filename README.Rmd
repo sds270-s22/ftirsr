@@ -66,7 +66,8 @@ head(my_data_no_interp)
 my_data_wide <- my_data %>%
   pivot_wider()
 
-head(my_data_wide)
+# Showing the first 5 columns and the first 10 rows
+head(my_data_wide[1:5], 10)
 ```
 
 ```{r}
