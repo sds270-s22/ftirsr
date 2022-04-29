@@ -190,7 +190,7 @@ preds <- predict(my_data_wide)
 preds
 ```
 
-```{r}
+```{r, eval = FALSE}
 # We can specify the number of components we want to see, as this is inherited from the predict.mvr method
 
 # Here we are predicting the same values as above, but choosing only 4 components
@@ -198,7 +198,7 @@ preds <- predict(my_data_wide, ncomp = 4)
 preds
 ```
 
-```{r}
+```{r, eval = FALSE}
 # If we want to see the details of the training model, we can call arctic_mod() 
 mod <- arctic_mod()
 summary(mod)

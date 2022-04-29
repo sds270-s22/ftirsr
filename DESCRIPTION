@@ -1,5 +1,5 @@
 Package: ftirsr
-Title: Easily run a Partial Least Squares Regression with FTIR spectroscopy data
+Title: Easily load FTIR spectroscopy data for a Partial Least Squares Regression Model
 Version: 0.0.0.9001
 Authors@R: c(
     person("Emma", "Vejcik", email = "evejcik@gmail.com", role = c("aut", "cre")),
