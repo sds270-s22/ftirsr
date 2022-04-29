@@ -25,7 +25,7 @@ The goal of `ftirsr` is to help easily create a Partial Least Squares Regression
 
 The development version from GitHub can be accessed like so:
 
-``` {r}
+``` {r, eval = FALSE}
 remotes::install_github("sds270-s22/ftirsr")
 ```
 

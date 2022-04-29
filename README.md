@@ -13,7 +13,8 @@ status](https://www.r-pkg.org/badges/version/ftirsr)](https://CRAN.R-project.org
 
 The goal of `ftirsr` is to help easily create a Partial Least Squares
 Regression model to estimate composition of natural compounds such as
-biogenic silica and total organic carbon in lake sediment core samples.
+Biogenic Silica and Total Organic Carbon in lake sediment core samples.
+This package aids a user in eliminating
 
 ## Installation
 
@@ -21,8 +22,6 @@ The development version from GitHub can be accessed like so:
 
 ``` r
 remotes::install_github("sds270-s22/ftirsr")
-#> Skipping install of 'ftirsr' from a github remote, the SHA1 (9eee09d7) has not changed since last install.
-#>   Use `force = TRUE` to force installation
 ```
 
 ## Examples
@@ -105,4 +104,4 @@ preds
 ```
 
 For more usage, please see our
-[vignette](https://github.com/sds270-s22/ftirsr/blob/main/vignettes/Vignette.Rmd)
+[vignette](https://github.com/sds270-s22/ftirsr/blob/main/vignettes/Vignette.Rmd).
