@@ -179,7 +179,9 @@ head(my_data_wide[1:8])
 ```{r}
 # Data must have the ftirs class to call the correct predict.ftirs() method
 is.ftirs(my_data_wide)
+```
 
+```{r}
 # Call predict
 preds <- predict(my_data_wide)
 ```
@@ -198,7 +200,7 @@ preds <- predict(my_data_wide, ncomp = 4)
 preds
 ```
 
-```{r, eval = FALSE}
+```{r}
 # If we want to see the details of the training model, we can call arctic_mod() 
 mod <- arctic_mod()
 summary(mod)
