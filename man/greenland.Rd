@@ -20,6 +20,6 @@ Gathered from \url{https://github.com/sds-capstone/PLSmodel}
 greenland
 }
 \description{
-A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 3697 wavenumbers.
+A dataset containing absorbance spectra for 28 Greenland lake sediment core samples across 1882 wavenumbers.
 }
 \keyword{datasets}

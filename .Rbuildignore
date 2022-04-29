@@ -7,3 +7,5 @@
 ^generate_df.R
 ^build_mod.R
 ^\.github$
+^doc$
+^Meta$
