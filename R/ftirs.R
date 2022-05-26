@@ -227,3 +227,4 @@ arctic_mod <- function(){
   our_mod <- plsr(bsi ~ ., ncomp = 10, data = combined_arctic_df_wide,
                   validation = "CV", segments = 10)
 }
+
