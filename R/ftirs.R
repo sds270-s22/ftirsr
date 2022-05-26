@@ -218,7 +218,6 @@ predict.ftirs <- function(object, ...) {
 #' @description This model is trained on arctic lake core samples from Alaska and Greenland.
 #' @importFrom pls plsr
 #' @importFrom tibble rownames_to_column
-#@rdname ftirs
 #' @export
 
 arctic_mod <- function(){
