@@ -8,6 +8,9 @@
 #' @importFrom magrittr %>%
 #' @importFrom readr read_csv
 #' @importFrom stats approx na.omit
+#' @return A dataset (tibble::tibble() or similar) of the same structure as the input dataset with missing values from the response variable replaced with interpolated values.
+#' @example interpolate_ftirs(wavenumber, object, ...)
+
 
 #' @export
 

@@ -14,6 +14,9 @@ NULL
 #' @importFrom fs path_file
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map_dfr
+#' @return a tibble generated from a single FTIRS sample
+#' @example
+#' read_ftirs_file(single_filepath = "samples/FISK-10.0.csv")
 #' @export
 
 
@@ -62,6 +65,10 @@ read_ftirs_file <- function(single_filepath, interpolate = TRUE, ...) {
 #' @importFrom purrr map_dfr
 #' @import readr
 #' @seealso `read_ftirs_files` for file specifications.
+#' @return A tidy data frame binding multiple FTIRS samples together
+#' @examples
+#' read_ftirs(dir_path = "samples", wet_chem_path = "wet-chem-data.csv")
+#' read_ftirs(dir_path = "samples", interpolate = FALSE)
 #' @export
 
 read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
@@ -91,6 +98,7 @@ read_ftirs <- function(dir_path, wet_chem_path = NULL, format = "long", ...) {
 #' @importFrom readr read_csv
 #' @importFrom magrittr %>%
 #' @import dplyr
+#' @return an FTIRS object with attached Wet Chemistry data and the modified input data
 #' @export
 
 read_wet_chem <- function(filepath, data, ...) {
@@ -113,6 +121,7 @@ read_wet_chem <- function(filepath, data, ...) {
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @import tibble
+#' @return A wide, non-tidy format FTIRS dataframe
 #' @export
 
 pivot_wider.ftirs <- function(ftirs_data_long, ...) {
@@ -136,6 +145,7 @@ pivot_wider.ftirs <- function(ftirs_data_long, ...) {
 #' @importFrom magrittr %>%
 #' @importFrom tibble rownames_to_column
 #' @importFrom tidyr pivot_longer
+#' @return A long, tidy format FTIRS dataframe
 #' @export
 
 pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
@@ -168,7 +178,11 @@ pivot_longer.ftirs <- function(ftirs_data_wide, wet_chem, ...) {
 #' Check if an object has the FTIRS class format
 #' @param obj any R object
 #' @param ... Other arguments passed on to methods. Not currently used.
+#' @return A boolean value TRUE or FALSE based on the class attributes of obj
+#' @example
+#' is.ftirs(obj)
 #' @export
+
 is.ftirs <- function(obj, ...) {
   "ftirs" %in% class(obj)
 }
@@ -176,7 +190,12 @@ is.ftirs <- function(obj, ...) {
 #' Coerce data frame into object class `ftirs`
 #' This only changes the class label of the object in order to access the methods of the class. It does not change anything about the object besides the classification.
 #' @param df A data.frame to coerce to class `ftirs`.
+#' @return An object of the same structure as the input df with an added `ftirs` class attribute.
+#' @example
+#' as.ftirs(df)
 #' @export
+
+
 as.ftirs <- function(df) {
   if ("data.frame" %in% class(df)) {
     class(df) <- c("ftirs", class(df))
@@ -194,6 +213,9 @@ as.ftirs <- function(df) {
 #' @import pls
 #' @importFrom tibble rownames_to_column
 #' @importFrom stats predict
+#' @return A dataset with predicted percentages of BSi levels in testing samples.
+#' @example
+#' predict(object, ...)
 #' @export
 
 predict.ftirs <- function(object, ...) {
@@ -218,6 +240,10 @@ predict.ftirs <- function(object, ...) {
 #' @description This model is trained on arctic lake core samples from Alaska and Greenland.
 #' @importFrom pls plsr
 #' @importFrom tibble rownames_to_column
+#' @return None
+#' @example
+#' arctic_mod()
+#' summary(mod)
 #' @export
 
 arctic_mod <- function(){
